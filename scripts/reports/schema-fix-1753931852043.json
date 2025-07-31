@@ -1,0 +1,45 @@
+{
+  "timestamp": "2025-07-31T03:17:32.017Z",
+  "operation": "emergency_schema_fix",
+  "status": "completed",
+  "issues_found": [
+    {
+      "table": "yt_reports",
+      "firstLine": 106,
+      "duplicateLine": 246,
+      "type": "duplicate_table_definition"
+    },
+    {
+      "table": "yt_teams",
+      "firstLine": 134,
+      "duplicateLine": 349,
+      "type": "duplicate_table_definition"
+    },
+    {
+      "table": "yt_team_members",
+      "firstLine": 145,
+      "duplicateLine": 360,
+      "type": "duplicate_table_definition"
+    }
+  ],
+  "fixes_applied": [
+    {
+      "table": "yt_reports",
+      "action": "removed_first_definition",
+      "lines_removed": "106-117"
+    },
+    {
+      "table": "yt_teams",
+      "action": "removed_second_definition",
+      "lines_removed": "349-357"
+    },
+    {
+      "table": "yt_team_members",
+      "action": "removed_second_definition",
+      "lines_removed": "360-370"
+    }
+  ],
+  "backup_created": true,
+  "verification_passed": true,
+  "completed_at": "2025-07-31T03:17:32.043Z"
+}

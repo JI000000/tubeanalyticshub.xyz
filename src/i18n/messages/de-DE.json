@@ -1,0 +1,87 @@
+{
+  "navigation": {
+    "dashboard": "[Deutsch] Dashboard",
+    "videos": "[Deutsch] Video Analytics",
+    "channels": "[Deutsch] Channel Analytics",
+    "comments": "[Deutsch] Comment Analytics",
+    "insights": "[Deutsch] AI Insights",
+    "reports": "[Deutsch] Professional Reports",
+    "competitor": "[Deutsch] Competitor Analysis",
+    "export": "[Deutsch] Data Export",
+    "settings": "[Deutsch] Settings",
+    "help": "[Deutsch] Help"
+  },
+  "dashboard": {
+    "shareInsights": "[Deutsch] Share Insights",
+    "shareInsightsDescription": "[Deutsch] Share analysis results and reports with your team"
+  },
+  "insights": {
+    "filterType": "[Deutsch] Insight Type",
+    "filterImportance": "[Deutsch] Importance",
+    "filterCategory": "[Deutsch] Analysis Category",
+    "allTypes": "[Deutsch] All Types",
+    "allLevels": "[Deutsch] All Levels",
+    "allCategories": "[Deutsch] All Categories",
+    "highPriority": "[Deutsch] High Priority",
+    "mediumPriority": "[Deutsch] Medium Priority",
+    "lowPriority": "[Deutsch] Low Priority",
+    "contentStrategy": "[Deutsch] Content Strategy",
+    "publishingTiming": "[Deutsch] Publishing Timing",
+    "audienceAnalysis": "[Deutsch] Audience Analysis",
+    "competitorAnalysis": "[Deutsch] Competitor Analysis"
+  },
+  "reports": {
+    "searchPlaceholder": "[Deutsch] Search report title or description...",
+    "allTypes": "[Deutsch] All Types",
+    "allStatuses": "[Deutsch] All Statuses",
+    "videoAnalysis": "[Deutsch] Video Analysis",
+    "channelAnalysis": "[Deutsch] Channel Analysis",
+    "competitorAnalysis": "[Deutsch] Competitor Analysis",
+    "trendAnalysis": "[Deutsch] Trend Analysis",
+    "createdAt": "[Deutsch] Created at",
+    "channelsCount": "[Deutsch] Channels Count",
+    "videosCount": "[Deutsch] Videos Count"
+  },
+  "competitor": {
+    "addCompetitorPlaceholder": "[Deutsch] Enter competitor YouTube Channel link...",
+    "refreshAnalysis": "[Deutsch] Refresh Analysis",
+    "channelOverview": "[Deutsch] Channel Comparison Overview",
+    "keyMetrics": "[Deutsch] Key Metrics Comparison",
+    "subscriberGrowth": "[Deutsch] Subscriber Growth",
+    "engagementRate": "[Deutsch] Engagement Rate Comparison",
+    "contentPerformance": "[Deutsch] Content Performance",
+    "yourChannel": "[Deutsch] Your Channel",
+    "subscribers": "[Deutsch] Subscribers",
+    "videoCount": "[Deutsch] Video Count",
+    "totalViews": "[Deutsch] Total Views",
+    "avgViews": "[Deutsch] Average Views",
+    "uploadFrequency": "[Deutsch] Upload Frequency",
+    "excellent": "[Deutsch] Excellent",
+    "good": "[Deutsch] Good",
+    "average": "[Deutsch] Average",
+    "needsImprovement": "[Deutsch] Needs Improvement"
+  },
+  "analytics": {
+    "avgEngagement": "[Deutsch] Average Engagement",
+    "viewCount": "[Deutsch] View Count",
+    "likeCount": "[Deutsch] Like Count",
+    "commentCount": "[Deutsch] Comment Count",
+    "subscriberCount": "[Deutsch] Subscriber Count",
+    "publishedAt": "[Deutsch] Published At",
+    "duration": "[Deutsch] Duration",
+    "tags": "[Deutsch] Tags",
+    "sentiment": "[Deutsch] Sentiment",
+    "positive": "[Deutsch] Positive",
+    "negative": "[Deutsch] Negative",
+    "neutral": "[Deutsch] Neutral"
+  },
+  "errors": {
+    "networkError": "[Deutsch] Network connection error",
+    "serverError": "[Deutsch] Server error",
+    "notFound": "[Deutsch] Not found",
+    "unauthorized": "[Deutsch] Unauthorized",
+    "forbidden": "[Deutsch] Forbidden",
+    "validationError": "[Deutsch] Validation error",
+    "unknownError": "[Deutsch] Unknown error"
+  }
+}

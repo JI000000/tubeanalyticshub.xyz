@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "generated_at": "2025-07-31T03:06:04.422Z",
+    "project": "YouTube Analytics Platform",
+    "version": "1.0.0"
+  },
+  "summary": {
+    "critical_issues": 2,
+    "important_issues": 2,
+    "minor_issues": 0,
+    "total_estimated_time": "1-2周"
+  },
+  "issues": {
+    "critical": [
+      {
+        "type": "missing_files",
+        "description": "关键API路由文件缺失",
+        "files": [
+          "src/app/api/analytics/dashboard/route.ts",
+          "src/app/api/analytics/dashboard/[id]/route.ts",
+          "src/app/api/analytics/reports/[id]/route.ts"
+        ],
+        "impact": "high",
+        "effort": "medium"
+      },
+      {
+        "type": "missing_components",
+        "description": "核心组件缺失",
+        "files": [
+          "src/components/analytics/AIInsightsPanel.tsx",
+          "src/components/analytics/TrendPrediction.tsx",
+          "src/components/reports/ReportBuilder.tsx",
+          "src/components/competitor/CompetitorAnalysis.tsx"
+        ],
+        "impact": "high",
+        "effort": "high"
+      }
+    ],
+    "important": [
+      {
+        "type": "mock_apis",
+        "description": "API路由使用Mock数据",
+        "files": [
+          "src/app/api/analytics/competitor/route.ts",
+          "src/app/api/analytics/insights/[id]/route.ts",
+          "src/app/api/analytics/insights/route.ts",
+          "src/app/api/analytics/reports/route.ts",
+          "src/app/api/comments/route.ts",
+          "src/app/api/recommendations/route.ts",
+          "src/app/api/team/route.ts",
+          "src/app/api/videos/route.ts"
+        ],
+        "impact": "high",
+        "effort": "high"
+      },
+      {
+        "type": "schema_issues",
+        "description": "数据库Schema问题",
+        "details": [
+          "yt_reports表定义重复"
+        ],
+        "impact": "medium",
+        "effort": "medium"
+      }
+    ],
+    "minor": []
+  },
+  "fix_plan": {
+    "phase1": [
+      {
+        "title": "创建缺失的API路由文件",
+        "priority": "P0",
+        "estimated_time": "2-3小时",
+        "risk": "low",
+        "dependencies": [],
+        "validation": "运行 npm run dev 确保无编译错误"
+      },
+      {
+        "title": "修复数据库Schema重复定义",
+        "priority": "P0",
+        "estimated_time": "1小时",
+        "risk": "medium",
+        "dependencies": [],
+        "validation": "运行数据库迁移测试"
+      }
+    ],
+    "phase2": [
+      {
+        "title": "实现核心Analytics组件",
+        "priority": "P1",
+        "estimated_time": "1-2天",
+        "risk": "medium",
+        "dependencies": [
+          "Phase 1完成"
+        ],
+        "validation": "组件渲染测试"
+      },
+      {
+        "title": "替换Mock API为真实实现",
+        "priority": "P1",
+        "estimated_time": "2-3天",
+        "risk": "high",
+        "dependencies": [
+          "数据库Schema修复"
+        ],
+        "validation": "API集成测试"
+      }
+    ],
+    "phase3": [
+      {
+        "title": "完善多语言翻译",
+        "priority": "P2",
+        "estimated_time": "1天",
+        "risk": "low",
+        "dependencies": [
+          "核心功能完成"
+        ],
+        "validation": "多语言切换测试"
+      }
+    ]
+  },
+  "manual_steps": {
+    "phase1_steps": [
+      {
+        "step": 1,
+        "title": "创建API路由目录结构",
+        "commands": [
+          "mkdir -p src/app/api/analytics/dashboard/[id]",
+          "mkdir -p src/app/api/analytics/reports/[id]",
+          "mkdir -p src/app/api/analytics/insights/[id]"
+        ],
+        "validation": "确认目录创建成功",
+        "rollback": "删除创建的目录"
+      },
+      {
+        "step": 2,
+        "title": "创建基础API路由文件",
+        "description": "手动创建每个route.ts文件，使用现有的模板",
+        "template_location": "src/app/api/analytics/reports/route.ts",
+        "validation": "检查文件语法正确性",
+        "rollback": "删除创建的文件"
+      }
+    ],
+    "phase2_steps": [
+      {
+        "step": 1,
+        "title": "实现AIInsightsPanel组件",
+        "description": "创建AI洞察展示组件",
+        "location": "src/components/analytics/AIInsightsPanel.tsx",
+        "dependencies": [
+          "UI组件库",
+          "TypeScript类型"
+        ],
+        "validation": "组件能正常渲染",
+        "rollback": "删除组件文件"
+      }
+    ]
+  }
+}

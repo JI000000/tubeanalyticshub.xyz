@@ -1,0 +1,29 @@
+{
+  "required": "Dieses Feld ist erforderlich",
+  "invalid": "Ungültige Eingabe",
+  "submit": "Senden",
+  "reset": "Zurücksetzen",
+  "placeholder": "Text eingeben...",
+  "validation": {
+    "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "url": "Bitte geben Sie eine gültige URL ein",
+    "minLength": "Mindestens {{min}} Zeichen erforderlich",
+    "maxLength": "Maximal {{max}} Zeichen erlaubt",
+    "pattern": "Ungültiges Format",
+    "numeric": "Bitte geben Sie eine gültige Zahl ein",
+    "positive": "Bitte geben Sie eine positive Zahl ein",
+    "integer": "Bitte geben Sie eine ganze Zahl ein"
+  },
+  "labels": {
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phone": "Telefonnummer",
+    "website": "Website",
+    "company": "Unternehmen",
+    "title": "Titel",
+    "description": "Beschreibung"
+  }
+}

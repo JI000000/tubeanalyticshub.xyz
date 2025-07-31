@@ -1,0 +1,87 @@
+{
+  "navigation": {
+    "dashboard": "[Español] Dashboard",
+    "videos": "[Español] Video Analytics",
+    "channels": "[Español] Channel Analytics",
+    "comments": "[Español] Comment Analytics",
+    "insights": "[Español] AI Insights",
+    "reports": "[Español] Professional Reports",
+    "competitor": "[Español] Competitor Analysis",
+    "export": "[Español] Data Export",
+    "settings": "[Español] Settings",
+    "help": "[Español] Help"
+  },
+  "dashboard": {
+    "shareInsights": "[Español] Share Insights",
+    "shareInsightsDescription": "[Español] Share analysis results and reports with your team"
+  },
+  "insights": {
+    "filterType": "[Español] Insight Type",
+    "filterImportance": "[Español] Importance",
+    "filterCategory": "[Español] Analysis Category",
+    "allTypes": "[Español] All Types",
+    "allLevels": "[Español] All Levels",
+    "allCategories": "[Español] All Categories",
+    "highPriority": "[Español] High Priority",
+    "mediumPriority": "[Español] Medium Priority",
+    "lowPriority": "[Español] Low Priority",
+    "contentStrategy": "[Español] Content Strategy",
+    "publishingTiming": "[Español] Publishing Timing",
+    "audienceAnalysis": "[Español] Audience Analysis",
+    "competitorAnalysis": "[Español] Competitor Analysis"
+  },
+  "reports": {
+    "searchPlaceholder": "[Español] Search report title or description...",
+    "allTypes": "[Español] All Types",
+    "allStatuses": "[Español] All Statuses",
+    "videoAnalysis": "[Español] Video Analysis",
+    "channelAnalysis": "[Español] Channel Analysis",
+    "competitorAnalysis": "[Español] Competitor Analysis",
+    "trendAnalysis": "[Español] Trend Analysis",
+    "createdAt": "[Español] Created at",
+    "channelsCount": "[Español] Channels Count",
+    "videosCount": "[Español] Videos Count"
+  },
+  "competitor": {
+    "addCompetitorPlaceholder": "[Español] Enter competitor YouTube Channel link...",
+    "refreshAnalysis": "[Español] Refresh Analysis",
+    "channelOverview": "[Español] Channel Comparison Overview",
+    "keyMetrics": "[Español] Key Metrics Comparison",
+    "subscriberGrowth": "[Español] Subscriber Growth",
+    "engagementRate": "[Español] Engagement Rate Comparison",
+    "contentPerformance": "[Español] Content Performance",
+    "yourChannel": "[Español] Your Channel",
+    "subscribers": "[Español] Subscribers",
+    "videoCount": "[Español] Video Count",
+    "totalViews": "[Español] Total Views",
+    "avgViews": "[Español] Average Views",
+    "uploadFrequency": "[Español] Upload Frequency",
+    "excellent": "[Español] Excellent",
+    "good": "[Español] Good",
+    "average": "[Español] Average",
+    "needsImprovement": "[Español] Needs Improvement"
+  },
+  "analytics": {
+    "avgEngagement": "[Español] Average Engagement",
+    "viewCount": "[Español] View Count",
+    "likeCount": "[Español] Like Count",
+    "commentCount": "[Español] Comment Count",
+    "subscriberCount": "[Español] Subscriber Count",
+    "publishedAt": "[Español] Published At",
+    "duration": "[Español] Duration",
+    "tags": "[Español] Tags",
+    "sentiment": "[Español] Sentiment",
+    "positive": "[Español] Positive",
+    "negative": "[Español] Negative",
+    "neutral": "[Español] Neutral"
+  },
+  "errors": {
+    "networkError": "[Español] Network connection error",
+    "serverError": "[Español] Server error",
+    "notFound": "[Español] Not found",
+    "unauthorized": "[Español] Unauthorized",
+    "forbidden": "[Español] Forbidden",
+    "validationError": "[Español] Validation error",
+    "unknownError": "[Español] Unknown error"
+  }
+}

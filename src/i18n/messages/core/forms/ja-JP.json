@@ -1,0 +1,29 @@
+{
+  "required": "この項目は必須です",
+  "invalid": "無効な入力",
+  "submit": "送信",
+  "reset": "リセット",
+  "placeholder": "テキストを入力...",
+  "validation": {
+    "email": "有効なメールアドレスを入力してください",
+    "url": "有効なURLを入力してください",
+    "minLength": "最低{{min}}文字必要です",
+    "maxLength": "最大{{max}}文字まで入力可能です",
+    "pattern": "無効な形式",
+    "numeric": "有効な数値を入力してください",
+    "positive": "正の数を入力してください",
+    "integer": "整数を入力してください"
+  },
+  "labels": {
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "firstName": "名",
+    "lastName": "姓",
+    "phone": "電話番号",
+    "website": "ウェブサイト",
+    "company": "会社",
+    "title": "タイトル",
+    "description": "説明"
+  }
+}

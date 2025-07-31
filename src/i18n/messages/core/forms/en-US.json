@@ -1,0 +1,29 @@
+{
+  "required": "This field is required",
+  "invalid": "Invalid input",
+  "submit": "Submit",
+  "reset": "Reset",
+  "placeholder": "Enter text...",
+  "validation": {
+    "email": "Please enter a valid email address",
+    "url": "Please enter a valid URL",
+    "minLength": "Minimum {{min}} characters required",
+    "maxLength": "Maximum {{max}} characters allowed",
+    "pattern": "Invalid format",
+    "numeric": "Please enter a valid number",
+    "positive": "Please enter a positive number",
+    "integer": "Please enter a whole number"
+  },
+  "labels": {
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone Number",
+    "website": "Website",
+    "company": "Company",
+    "title": "Title",
+    "description": "Description"
+  }
+}

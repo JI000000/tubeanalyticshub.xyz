@@ -1,0 +1,29 @@
+{
+  "required": "Ce champ est obligatoire",
+  "invalid": "Saisie invalide",
+  "submit": "Soumettre",
+  "reset": "Réinitialiser",
+  "placeholder": "Saisir le texte...",
+  "validation": {
+    "email": "Veuillez saisir une adresse e-mail valide",
+    "url": "Veuillez saisir une URL valide",
+    "minLength": "Minimum {{min}} caractères requis",
+    "maxLength": "Maximum {{max}} caractères autorisés",
+    "pattern": "Format invalide",
+    "numeric": "Veuillez saisir un nombre valide",
+    "positive": "Veuillez saisir un nombre positif",
+    "integer": "Veuillez saisir un nombre entier"
+  },
+  "labels": {
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "phone": "Numéro de téléphone",
+    "website": "Site web",
+    "company": "Entreprise",
+    "title": "Titre",
+    "description": "Description"
+  }
+}

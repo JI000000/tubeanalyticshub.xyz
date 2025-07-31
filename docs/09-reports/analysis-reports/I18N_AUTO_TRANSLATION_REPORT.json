@@ -1,0 +1,139 @@
+{
+  "timestamp": "2025-07-29T06:15:00.617Z",
+  "summary": {
+    "processedLanguages": 4,
+    "totalGenerated": 1896,
+    "errors": 0
+  },
+  "details": {
+    "processed": [
+      {
+        "language": "ko-KR",
+        "missingCount": 216,
+        "generatedCount": 216
+      },
+      {
+        "language": "de-DE",
+        "missingCount": 560,
+        "generatedCount": 560
+      },
+      {
+        "language": "fr-FR",
+        "missingCount": 560,
+        "generatedCount": 560
+      },
+      {
+        "language": "es-ES",
+        "missingCount": 560,
+        "generatedCount": 560
+      }
+    ],
+    "generated": [
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/ko-KR.json",
+        "count": 55
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/errors/ko-KR.json",
+        "count": 16
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/pages/ko-KR.json",
+        "count": 73
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/features/ko-KR.json",
+        "count": 71
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/ko-KR.json",
+        "count": 1
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/de-DE.json",
+        "count": 185
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/errors/de-DE.json",
+        "count": 16
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/navigation/de-DE.json",
+        "count": 4
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/pages/de-DE.json",
+        "count": 123
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/pages/dashboard/de-DE.json",
+        "count": 33
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/features/de-DE.json",
+        "count": 128
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/de-DE.json",
+        "count": 71
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/fr-FR.json",
+        "count": 185
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/errors/fr-FR.json",
+        "count": 16
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/navigation/fr-FR.json",
+        "count": 4
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/pages/fr-FR.json",
+        "count": 123
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/pages/dashboard/fr-FR.json",
+        "count": 33
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/features/fr-FR.json",
+        "count": 128
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/fr-FR.json",
+        "count": 71
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/es-ES.json",
+        "count": 185
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/errors/es-ES.json",
+        "count": 16
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/core/navigation/es-ES.json",
+        "count": 4
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/pages/es-ES.json",
+        "count": 123
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/pages/dashboard/es-ES.json",
+        "count": 33
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/features/es-ES.json",
+        "count": 128
+      },
+      {
+        "file": "/Users/jiji/Documents/website/youtubescraper/youtube-scraper/src/i18n/messages/es-ES.json",
+        "count": 71
+      }
+    ],
+    "errors": []
+  }
+}

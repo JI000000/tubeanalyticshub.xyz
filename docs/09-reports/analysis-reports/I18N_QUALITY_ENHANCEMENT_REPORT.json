@@ -1,0 +1,54 @@
+{
+  "timestamp": "2025-07-29T06:24:36.610Z",
+  "summary": {
+    "totalLanguages": 7,
+    "totalImprovements": 0,
+    "qualityScore": 100
+  },
+  "languageStats": {
+    "en-US": {
+      "totalKeys": 1171,
+      "validKeys": 1171,
+      "completeness": 100,
+      "files": 12
+    },
+    "zh-CN": {
+      "totalKeys": 1521,
+      "validKeys": 1521,
+      "completeness": 100,
+      "files": 12
+    },
+    "ja-JP": {
+      "totalKeys": 1071,
+      "validKeys": 1071,
+      "completeness": 100,
+      "files": 12
+    },
+    "ko-KR": {
+      "totalKeys": 1082,
+      "validKeys": 1082,
+      "completeness": 100,
+      "files": 12
+    },
+    "de-DE": {
+      "totalKeys": 1113,
+      "validKeys": 1113,
+      "completeness": 100,
+      "files": 12
+    },
+    "fr-FR": {
+      "totalKeys": 1113,
+      "validKeys": 1113,
+      "completeness": 100,
+      "files": 12
+    },
+    "es-ES": {
+      "totalKeys": 1113,
+      "validKeys": 1113,
+      "completeness": 100,
+      "files": 12
+    }
+  },
+  "improvements": [],
+  "recommendations": []
+}

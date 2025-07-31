@@ -1,0 +1,87 @@
+{
+  "navigation": {
+    "dashboard": "[Français] Dashboard",
+    "videos": "[Français] Video Analytics",
+    "channels": "[Français] Channel Analytics",
+    "comments": "[Français] Comment Analytics",
+    "insights": "[Français] AI Insights",
+    "reports": "[Français] Professional Reports",
+    "competitor": "[Français] Competitor Analysis",
+    "export": "[Français] Data Export",
+    "settings": "[Français] Settings",
+    "help": "[Français] Help"
+  },
+  "dashboard": {
+    "shareInsights": "[Français] Share Insights",
+    "shareInsightsDescription": "[Français] Share analysis results and reports with your team"
+  },
+  "insights": {
+    "filterType": "[Français] Insight Type",
+    "filterImportance": "[Français] Importance",
+    "filterCategory": "[Français] Analysis Category",
+    "allTypes": "[Français] All Types",
+    "allLevels": "[Français] All Levels",
+    "allCategories": "[Français] All Categories",
+    "highPriority": "[Français] High Priority",
+    "mediumPriority": "[Français] Medium Priority",
+    "lowPriority": "[Français] Low Priority",
+    "contentStrategy": "[Français] Content Strategy",
+    "publishingTiming": "[Français] Publishing Timing",
+    "audienceAnalysis": "[Français] Audience Analysis",
+    "competitorAnalysis": "[Français] Competitor Analysis"
+  },
+  "reports": {
+    "searchPlaceholder": "[Français] Search report title or description...",
+    "allTypes": "[Français] All Types",
+    "allStatuses": "[Français] All Statuses",
+    "videoAnalysis": "[Français] Video Analysis",
+    "channelAnalysis": "[Français] Channel Analysis",
+    "competitorAnalysis": "[Français] Competitor Analysis",
+    "trendAnalysis": "[Français] Trend Analysis",
+    "createdAt": "[Français] Created at",
+    "channelsCount": "[Français] Channels Count",
+    "videosCount": "[Français] Videos Count"
+  },
+  "competitor": {
+    "addCompetitorPlaceholder": "[Français] Enter competitor YouTube Channel link...",
+    "refreshAnalysis": "[Français] Refresh Analysis",
+    "channelOverview": "[Français] Channel Comparison Overview",
+    "keyMetrics": "[Français] Key Metrics Comparison",
+    "subscriberGrowth": "[Français] Subscriber Growth",
+    "engagementRate": "[Français] Engagement Rate Comparison",
+    "contentPerformance": "[Français] Content Performance",
+    "yourChannel": "[Français] Your Channel",
+    "subscribers": "[Français] Subscribers",
+    "videoCount": "[Français] Video Count",
+    "totalViews": "[Français] Total Views",
+    "avgViews": "[Français] Average Views",
+    "uploadFrequency": "[Français] Upload Frequency",
+    "excellent": "[Français] Excellent",
+    "good": "[Français] Good",
+    "average": "[Français] Average",
+    "needsImprovement": "[Français] Needs Improvement"
+  },
+  "analytics": {
+    "avgEngagement": "[Français] Average Engagement",
+    "viewCount": "[Français] View Count",
+    "likeCount": "[Français] Like Count",
+    "commentCount": "[Français] Comment Count",
+    "subscriberCount": "[Français] Subscriber Count",
+    "publishedAt": "[Français] Published At",
+    "duration": "[Français] Duration",
+    "tags": "[Français] Tags",
+    "sentiment": "[Français] Sentiment",
+    "positive": "[Français] Positive",
+    "negative": "[Français] Negative",
+    "neutral": "[Français] Neutral"
+  },
+  "errors": {
+    "networkError": "[Français] Network connection error",
+    "serverError": "[Français] Server error",
+    "notFound": "[Français] Not found",
+    "unauthorized": "[Français] Unauthorized",
+    "forbidden": "[Français] Forbidden",
+    "validationError": "[Français] Validation error",
+    "unknownError": "[Français] Unknown error"
+  }
+}
