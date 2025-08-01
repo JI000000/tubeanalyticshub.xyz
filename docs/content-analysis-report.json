@@ -1,0 +1,1636 @@
+{
+  "summary": {
+    "totalDocuments": 49,
+    "similarPairs": 23,
+    "integrationSuggestions": 7,
+    "highValueDocs": 29,
+    "lowValueDocs": 2
+  },
+  "documents": [
+    {
+      "path": "01-project-overview/project-config.md",
+      "category": "overview",
+      "importance": "high",
+      "wordCount": 162,
+      "language": "mixed",
+      "modified": "2025-07-22T12:13:28.240Z"
+    },
+    {
+      "path": "04-development/FILE_ORGANIZATION_RULES.md",
+      "category": "development",
+      "importance": "medium",
+      "wordCount": 284,
+      "language": "zh",
+      "modified": "2025-07-29T10:04:32.864Z"
+    },
+    {
+      "path": "04-development/FILE_ORGANIZATION_SOLUTION.md",
+      "category": "development",
+      "importance": "medium",
+      "wordCount": 263,
+      "language": "zh",
+      "modified": "2025-07-29T10:11:11.505Z"
+    },
+    {
+      "path": "04-development/setup-guide.md",
+      "category": "setup",
+      "importance": "high",
+      "wordCount": 160,
+      "language": "zh",
+      "modified": "2025-07-22T14:03:07.348Z"
+    },
+    {
+      "path": "06-i18n/cost-analysis.md",
+      "category": "i18n",
+      "importance": "medium",
+      "wordCount": 526,
+      "language": "mixed",
+      "modified": "2025-07-29T06:41:25.083Z"
+    },
+    {
+      "path": "06-i18n/i18n-strategy.md",
+      "category": "i18n",
+      "importance": "high",
+      "wordCount": 5591,
+      "language": "en",
+      "modified": "2025-07-25T06:49:53.426Z"
+    },
+    {
+      "path": "06-i18n/script-usage-guide.md",
+      "category": "i18n",
+      "importance": "high",
+      "wordCount": 760,
+      "language": "mixed",
+      "modified": "2025-07-29T06:19:38.634Z"
+    },
+    {
+      "path": "06-i18n/translation-guide.md",
+      "category": "i18n",
+      "importance": "high",
+      "wordCount": 471,
+      "language": "mixed",
+      "modified": "2025-07-25T07:00:03.172Z"
+    },
+    {
+      "path": "09-reports/accurate-task-status-2025-07-31.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 850,
+      "language": "zh",
+      "modified": "2025-07-31T03:04:34.833Z"
+    },
+    {
+      "path": "09-reports/analysis-reports/CLEANUP_EXECUTION_SUMMARY.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 551,
+      "language": "zh",
+      "modified": "2025-07-29T07:53:09.300Z"
+    },
+    {
+      "path": "09-reports/analysis-reports/DOCUMENT_REORGANIZATION_PLAN.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 601,
+      "language": "zh",
+      "modified": "2025-07-29T07:20:12.345Z"
+    },
+    {
+      "path": "09-reports/analysis-reports/FILE_CLEANUP_PLAN.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 573,
+      "language": "mixed",
+      "modified": "2025-07-29T07:39:50.001Z"
+    },
+    {
+      "path": "09-reports/analysis-reports/FINAL_ORGANIZATION_REPORT.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 503,
+      "language": "mixed",
+      "modified": "2025-07-29T10:30:15.330Z"
+    },
+    {
+      "path": "09-reports/analysis-reports/PROJECT_REALITY_CHECK.md",
+      "category": "report",
+      "importance": "medium",
+      "wordCount": 684,
+      "language": "zh",
+      "modified": "2025-07-29T07:30:55.033Z"
+    },
+    {
+      "path": "09-reports/analysis-reports/REALITY_BASED_ACTION_PLAN.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 400,
+      "language": "zh",
+      "modified": "2025-07-29T10:40:51.313Z"
+    },
+    {
+      "path": "09-reports/analysis-reports/SCRIPT_CLEANUP_EXECUTION.md",
+      "category": "report",
+      "importance": "medium",
+      "wordCount": 307,
+      "language": "mixed",
+      "modified": "2025-07-29T09:46:28.931Z"
+    },
+    {
+      "path": "09-reports/analysis-reports/SCRIPT_ORGANIZATION_PLAN.md",
+      "category": "report",
+      "importance": "medium",
+      "wordCount": 414,
+      "language": "zh",
+      "modified": "2025-07-29T08:44:38.288Z"
+    },
+    {
+      "path": "09-reports/analysis-reports/SCRIPT_ORGANIZATION_SUMMARY.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 424,
+      "language": "zh",
+      "modified": "2025-07-29T09:45:42.399Z"
+    },
+    {
+      "path": "09-reports/analysis-reports/TASKS_REALITY_CHECK.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 1084,
+      "language": "zh",
+      "modified": "2025-07-29T07:48:51.181Z"
+    },
+    {
+      "path": "09-reports/archived/I18N_DAY1_FINAL_REPORT.md",
+      "category": "i18n",
+      "importance": "medium",
+      "wordCount": 414,
+      "language": "zh",
+      "modified": "2025-07-28T08:23:37.827Z"
+    },
+    {
+      "path": "09-reports/archived/I18N_FINAL_SOLUTION_REPORT.md",
+      "category": "overview",
+      "importance": "high",
+      "wordCount": 702,
+      "language": "zh",
+      "modified": "2025-07-28T09:45:49.495Z"
+    },
+    {
+      "path": "09-reports/archived/I18N_PROJECT_PLAN.md",
+      "category": "overview",
+      "importance": "medium",
+      "wordCount": 606,
+      "language": "zh",
+      "modified": "2025-07-28T08:01:34.419Z"
+    },
+    {
+      "path": "09-reports/archived/I18N_ULTIMATE_ACHIEVEMENT.md",
+      "category": "i18n",
+      "importance": "high",
+      "wordCount": 478,
+      "language": "zh",
+      "modified": "2025-07-28T08:24:39.594Z"
+    },
+    {
+      "path": "09-reports/archived/INTERNATIONALIZATION_COMPLETION_REPORT.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 642,
+      "language": "zh",
+      "modified": "2025-07-28T07:15:18.662Z"
+    },
+    {
+      "path": "09-reports/archived/INTERNATIONALIZATION_PROGRESS_REPORT.md",
+      "category": "report",
+      "importance": "medium",
+      "wordCount": 430,
+      "language": "zh",
+      "modified": "2025-07-28T07:26:49.425Z"
+    },
+    {
+      "path": "09-reports/archived/INTERNATIONALIZATION_REALITY_CHECK.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 433,
+      "language": "zh",
+      "modified": "2025-07-28T07:16:35.827Z"
+    },
+    {
+      "path": "09-reports/archived/README.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 500,
+      "language": "en",
+      "modified": "2025-07-23T08:35:00.660Z"
+    },
+    {
+      "path": "09-reports/code-review-executive-summary.md",
+      "category": "report",
+      "importance": "medium",
+      "wordCount": 181,
+      "language": "zh",
+      "modified": "2025-07-31T03:06:36.800Z"
+    },
+    {
+      "path": "09-reports/comprehensive-code-review-report.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 788,
+      "language": "zh",
+      "modified": "2025-07-31T02:58:08.871Z"
+    },
+    {
+      "path": "09-reports/final-status-summary.md",
+      "category": "report",
+      "importance": "medium",
+      "wordCount": 562,
+      "language": "zh",
+      "modified": "2025-07-30T07:09:46.799Z"
+    },
+    {
+      "path": "09-reports/project-ready-for-next-phase.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 660,
+      "language": "zh",
+      "modified": "2025-07-30T13:14:02.653Z"
+    },
+    {
+      "path": "09-reports/youtube-api-integration-complete.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 738,
+      "language": "zh",
+      "modified": "2025-07-30T13:35:55.441Z"
+    },
+    {
+      "path": "10-task-status/EXECUTIVE_SUMMARY.md",
+      "category": "report",
+      "importance": "medium",
+      "wordCount": 210,
+      "language": "zh",
+      "modified": "2025-07-31T06:23:16.015Z"
+    },
+    {
+      "path": "10-task-status/build-test-success-2025-07-31T10-30-00Z.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 698,
+      "language": "zh",
+      "modified": "2025-07-31T09:31:23.516Z"
+    },
+    {
+      "path": "10-task-status/code-review-reality-check-2025-07-31T06-00-00Z.md",
+      "category": "report",
+      "importance": "medium",
+      "wordCount": 764,
+      "language": "zh",
+      "modified": "2025-07-31T06:17:17.514Z"
+    },
+    {
+      "path": "10-task-status/deployment-ready-2025-07-31T10-00-00Z.md",
+      "category": "deployment",
+      "importance": "high",
+      "wordCount": 482,
+      "language": "mixed",
+      "modified": "2025-07-31T08:01:00.515Z"
+    },
+    {
+      "path": "10-task-status/final-reality-check-summary-2025-07-31T06-30-00Z.md",
+      "category": "report",
+      "importance": "medium",
+      "wordCount": 607,
+      "language": "zh",
+      "modified": "2025-07-31T06:22:48.820Z"
+    },
+    {
+      "path": "10-task-status/phase1-completion-summary-2025-07-31T08-00-00Z.md",
+      "category": "report",
+      "importance": "medium",
+      "wordCount": 742,
+      "language": "zh",
+      "modified": "2025-07-31T06:46:54.745Z"
+    },
+    {
+      "path": "10-task-status/phase1-frontend-update-2025-07-31T07-30-00Z.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 581,
+      "language": "zh",
+      "modified": "2025-07-31T06:38:04.650Z"
+    },
+    {
+      "path": "10-task-status/phase1-recovery-progress-2025-07-31T07-00-00Z.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 546,
+      "language": "zh",
+      "modified": "2025-07-31T06:33:21.752Z"
+    },
+    {
+      "path": "10-task-status/phase2-i18n-fix-progress-2025-07-31T08-30-00Z.md",
+      "category": "i18n",
+      "importance": "high",
+      "wordCount": 735,
+      "language": "zh",
+      "modified": "2025-07-31T07:10:06.602Z"
+    },
+    {
+      "path": "10-task-status/phase3-team-collaboration-progress-2025-07-31T09-00-00Z.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 886,
+      "language": "zh",
+      "modified": "2025-07-31T07:42:03.883Z"
+    },
+    {
+      "path": "10-task-status/project-completion-summary-2025-07-31T09-30-00Z.md",
+      "category": "report",
+      "importance": "high",
+      "wordCount": 943,
+      "language": "zh",
+      "modified": "2025-07-31T07:43:32.144Z"
+    },
+    {
+      "path": "README.md",
+      "category": "general",
+      "importance": "high",
+      "wordCount": 160,
+      "language": "en",
+      "modified": "2025-08-01T04:56:50.724Z"
+    },
+    {
+      "path": "project-structure-analysis-backup-2025-08-01.md",
+      "category": "overview",
+      "importance": "low",
+      "wordCount": 571,
+      "language": "zh",
+      "modified": "2025-08-01T05:22:28.335Z"
+    },
+    {
+      "path": "setup-guide.md",
+      "category": "setup",
+      "importance": "high",
+      "wordCount": 735,
+      "language": "mixed",
+      "modified": "2025-07-30T13:27:06.334Z"
+    },
+    {
+      "path": "CLEANUP_SUMMARY.md",
+      "category": "general",
+      "importance": "medium",
+      "wordCount": 387,
+      "language": "en",
+      "modified": "2025-08-01T04:58:15.226Z"
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "category": "deployment",
+      "importance": "medium",
+      "wordCount": 380,
+      "language": "mixed",
+      "modified": "2025-07-31T07:55:51.405Z"
+    },
+    {
+      "path": "PROJECT_OVERVIEW.md",
+      "category": "overview",
+      "importance": "high",
+      "wordCount": 381,
+      "language": "en",
+      "modified": "2025-08-01T04:57:26.771Z"
+    }
+  ],
+  "similarity": [
+    {
+      "doc1": "04-development/FILE_ORGANIZATION_RULES.md",
+      "doc2": "04-development/FILE_ORGANIZATION_SOLUTION.md",
+      "similarity": {
+        "score": 0.3926056338028169,
+        "reasons": [
+          "关键词相似度: 33.3%",
+          "长度相似度: 92.6%",
+          "同类文档: development"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/accurate-task-status-2025-07-31.md",
+      "doc2": "09-reports/analysis-reports/PROJECT_REALITY_CHECK.md",
+      "similarity": {
+        "score": 0.3804705882352941,
+        "reasons": [
+          "关键词相似度: 33.3%",
+          "长度相似度: 80.5%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/accurate-task-status-2025-07-31.md",
+      "doc2": "09-reports/analysis-reports/TASKS_REALITY_CHECK.md",
+      "similarity": {
+        "score": 0.3855561412756985,
+        "reasons": [
+          "关键词相似度: 35.7%",
+          "长度相似度: 78.4%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/accurate-task-status-2025-07-31.md",
+      "doc2": "09-reports/comprehensive-code-review-report.md",
+      "similarity": {
+        "score": 0.4361841432225064,
+        "reasons": [
+          "关键词相似度: 47.8%",
+          "长度相似度: 92.7%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/accurate-task-status-2025-07-31.md",
+      "doc2": "10-task-status/code-review-reality-check-2025-07-31T06-00-00Z.md",
+      "similarity": {
+        "score": 0.39702521008403363,
+        "reasons": [
+          "关键词相似度: 35.7%",
+          "长度相似度: 89.9%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/accurate-task-status-2025-07-31.md",
+      "doc2": "10-task-status/final-reality-check-summary-2025-07-31T06-30-00Z.md",
+      "similarity": {
+        "score": 0.3785546218487395,
+        "reasons": [
+          "关键词相似度: 35.7%",
+          "长度相似度: 71.4%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/analysis-reports/FINAL_ORGANIZATION_REPORT.md",
+      "doc2": "09-reports/analysis-reports/SCRIPT_ORGANIZATION_SUMMARY.md",
+      "similarity": {
+        "score": 0.4842942345924453,
+        "reasons": [
+          "关键词相似度: 66.7%",
+          "长度相似度: 84.3%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/analysis-reports/PROJECT_REALITY_CHECK.md",
+      "doc2": "09-reports/analysis-reports/TASKS_REALITY_CHECK.md",
+      "similarity": {
+        "score": 0.37142857142857144,
+        "reasons": [
+          "关键词相似度: 57.1%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/analysis-reports/PROJECT_REALITY_CHECK.md",
+      "doc2": "09-reports/final-status-summary.md",
+      "similarity": {
+        "score": 0.4821637426900585,
+        "reasons": [
+          "关键词相似度: 66.7%",
+          "长度相似度: 82.2%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/analysis-reports/PROJECT_REALITY_CHECK.md",
+      "doc2": "10-task-status/code-review-reality-check-2025-07-31T06-00-00Z.md",
+      "similarity": {
+        "score": 0.46095736724008973,
+        "reasons": [
+          "关键词相似度: 57.1%",
+          "长度相似度: 89.5%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/analysis-reports/PROJECT_REALITY_CHECK.md",
+      "doc2": "10-task-status/final-reality-check-summary-2025-07-31T06-30-00Z.md",
+      "similarity": {
+        "score": 0.46017126148705095,
+        "reasons": [
+          "关键词相似度: 57.1%",
+          "长度相似度: 88.7%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/analysis-reports/TASKS_REALITY_CHECK.md",
+      "doc2": "09-reports/archived/INTERNATIONALIZATION_PROGRESS_REPORT.md",
+      "similarity": {
+        "score": 0.32,
+        "reasons": [
+          "关键词相似度: 40.0%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/analysis-reports/TASKS_REALITY_CHECK.md",
+      "doc2": "09-reports/final-status-summary.md",
+      "similarity": {
+        "score": 0.35,
+        "reasons": [
+          "关键词相似度: 50.0%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/analysis-reports/TASKS_REALITY_CHECK.md",
+      "doc2": "10-task-status/code-review-reality-check-2025-07-31T06-00-00Z.md",
+      "similarity": {
+        "score": 0.570479704797048,
+        "reasons": [
+          "关键词相似度: 100.0%",
+          "长度相似度: 70.5%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/analysis-reports/TASKS_REALITY_CHECK.md",
+      "doc2": "10-task-status/final-reality-check-summary-2025-07-31T06-30-00Z.md",
+      "similarity": {
+        "score": 0.4,
+        "reasons": [
+          "关键词相似度: 66.7%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/archived/I18N_DAY1_FINAL_REPORT.md",
+      "doc2": "09-reports/archived/I18N_ULTIMATE_ACHIEVEMENT.md",
+      "similarity": {
+        "score": 0.40661087866108786,
+        "reasons": [
+          "关键词相似度: 40.0%",
+          "长度相似度: 86.6%",
+          "同类文档: i18n"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/archived/INTERNATIONALIZATION_PROGRESS_REPORT.md",
+      "doc2": "10-task-status/code-review-reality-check-2025-07-31T06-00-00Z.md",
+      "similarity": {
+        "score": 0.32,
+        "reasons": [
+          "关键词相似度: 40.0%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/archived/INTERNATIONALIZATION_PROGRESS_REPORT.md",
+      "doc2": "10-task-status/final-reality-check-summary-2025-07-31T06-30-00Z.md",
+      "similarity": {
+        "score": 0.390840197693575,
+        "reasons": [
+          "关键词相似度: 40.0%",
+          "长度相似度: 70.8%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/archived/INTERNATIONALIZATION_PROGRESS_REPORT.md",
+      "doc2": "10-task-status/phase1-completion-summary-2025-07-31T08-00-00Z.md",
+      "similarity": {
+        "score": 0.35,
+        "reasons": [
+          "关键词相似度: 50.0%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/archived/INTERNATIONALIZATION_REALITY_CHECK.md",
+      "doc2": "10-task-status/phase1-recovery-progress-2025-07-31T07-00-00Z.md",
+      "similarity": {
+        "score": 0.40787545787545787,
+        "reasons": [
+          "关键词相似度: 42.9%",
+          "长度相似度: 79.3%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/final-status-summary.md",
+      "doc2": "10-task-status/code-review-reality-check-2025-07-31T06-00-00Z.md",
+      "similarity": {
+        "score": 0.4235602094240838,
+        "reasons": [
+          "关键词相似度: 50.0%",
+          "长度相似度: 73.6%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "09-reports/final-status-summary.md",
+      "doc2": "10-task-status/final-reality-check-summary-2025-07-31T06-30-00Z.md",
+      "similarity": {
+        "score": 0.4425864909390445,
+        "reasons": [
+          "关键词相似度: 50.0%",
+          "长度相似度: 92.6%",
+          "同类文档: report"
+        ]
+      }
+    },
+    {
+      "doc1": "10-task-status/code-review-reality-check-2025-07-31T06-00-00Z.md",
+      "doc2": "10-task-status/final-reality-check-summary-2025-07-31T06-30-00Z.md",
+      "similarity": {
+        "score": 0.4794502617801047,
+        "reasons": [
+          "关键词相似度: 66.7%",
+          "长度相似度: 79.5%",
+          "同类文档: report"
+        ]
+      }
+    }
+  ],
+  "valueAssessment": [
+    {
+      "path": "01-project-overview/project-config.md",
+      "value": {
+        "score": 6,
+        "level": "high",
+        "reasons": [
+          "结构清晰",
+          "包含有用链接",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "04-development/FILE_ORGANIZATION_RULES.md",
+      "value": {
+        "score": 5,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "04-development/FILE_ORGANIZATION_SOLUTION.md",
+      "value": {
+        "score": 5,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "04-development/setup-guide.md",
+      "value": {
+        "score": 7,
+        "level": "high",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "06-i18n/cost-analysis.md",
+      "value": {
+        "score": 8,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "包含有用链接",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "06-i18n/i18n-strategy.md",
+      "value": {
+        "score": 10,
+        "level": "high",
+        "reasons": [
+          "内容丰富",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "06-i18n/script-usage-guide.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "06-i18n/translation-guide.md",
+      "value": {
+        "score": 8,
+        "level": "high",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "包含有用链接",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/accurate-task-status-2025-07-31.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "09-reports/analysis-reports/CLEANUP_EXECUTION_SUMMARY.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/analysis-reports/DOCUMENT_REORGANIZATION_PLAN.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/analysis-reports/FILE_CLEANUP_PLAN.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/analysis-reports/FINAL_ORGANIZATION_REPORT.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/analysis-reports/PROJECT_REALITY_CHECK.md",
+      "value": {
+        "score": 5,
+        "level": "medium",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/analysis-reports/REALITY_BASED_ACTION_PLAN.md",
+      "value": {
+        "score": 7,
+        "level": "high",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/analysis-reports/SCRIPT_CLEANUP_EXECUTION.md",
+      "value": {
+        "score": 3,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/analysis-reports/SCRIPT_ORGANIZATION_PLAN.md",
+      "value": {
+        "score": 3,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/analysis-reports/SCRIPT_ORGANIZATION_SUMMARY.md",
+      "value": {
+        "score": 7,
+        "level": "high",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/analysis-reports/TASKS_REALITY_CHECK.md",
+      "value": {
+        "score": 8,
+        "level": "high",
+        "reasons": [
+          "内容丰富",
+          "结构清晰",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/archived/I18N_DAY1_FINAL_REPORT.md",
+      "value": {
+        "score": 0,
+        "level": "very-low",
+        "reasons": [
+          "结构清晰",
+          "中等重要性",
+          "已归档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "archive",
+          "reason": "建议移动到归档目录"
+        }
+      ]
+    },
+    {
+      "path": "09-reports/archived/I18N_FINAL_SOLUTION_REPORT.md",
+      "value": {
+        "score": 6,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档",
+          "已归档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "archive",
+          "reason": "建议移动到归档目录"
+        }
+      ]
+    },
+    {
+      "path": "09-reports/archived/I18N_PROJECT_PLAN.md",
+      "value": {
+        "score": 2,
+        "level": "low",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "中等重要性",
+          "已归档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "archive",
+          "reason": "建议移动到归档目录"
+        }
+      ]
+    },
+    {
+      "path": "09-reports/archived/I18N_ULTIMATE_ACHIEVEMENT.md",
+      "value": {
+        "score": 4,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档",
+          "已归档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "archive",
+          "reason": "建议移动到归档目录"
+        }
+      ]
+    },
+    {
+      "path": "09-reports/archived/INTERNATIONALIZATION_COMPLETION_REPORT.md",
+      "value": {
+        "score": 6,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档",
+          "已归档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "archive",
+          "reason": "建议移动到归档目录"
+        }
+      ]
+    },
+    {
+      "path": "09-reports/archived/INTERNATIONALIZATION_PROGRESS_REPORT.md",
+      "value": {
+        "score": 0,
+        "level": "very-low",
+        "reasons": [
+          "结构清晰",
+          "中等重要性",
+          "已归档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "archive",
+          "reason": "建议移动到归档目录"
+        }
+      ]
+    },
+    {
+      "path": "09-reports/archived/INTERNATIONALIZATION_REALITY_CHECK.md",
+      "value": {
+        "score": 4,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档",
+          "已归档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "archive",
+          "reason": "建议移动到归档目录"
+        }
+      ]
+    },
+    {
+      "path": "09-reports/archived/README.md",
+      "value": {
+        "score": 5,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "包含有用链接",
+          "高重要性文档",
+          "已归档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "archive",
+          "reason": "建议移动到归档目录"
+        }
+      ]
+    },
+    {
+      "path": "09-reports/code-review-executive-summary.md",
+      "value": {
+        "score": 4,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "包含有用链接",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/comprehensive-code-review-report.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/final-status-summary.md",
+      "value": {
+        "score": 5,
+        "level": "medium",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/project-ready-for-next-phase.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "09-reports/youtube-api-integration-complete.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "10-task-status/EXECUTIVE_SUMMARY.md",
+      "value": {
+        "score": 3,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "10-task-status/build-test-success-2025-07-31T10-30-00Z.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "10-task-status/code-review-reality-check-2025-07-31T06-00-00Z.md",
+      "value": {
+        "score": 5,
+        "level": "medium",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "中等重要性"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "10-task-status/deployment-ready-2025-07-31T10-00-00Z.md",
+      "value": {
+        "score": 7,
+        "level": "high",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "10-task-status/final-reality-check-summary-2025-07-31T06-30-00Z.md",
+      "value": {
+        "score": 5,
+        "level": "medium",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "中等重要性"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "10-task-status/phase1-completion-summary-2025-07-31T08-00-00Z.md",
+      "value": {
+        "score": 5,
+        "level": "medium",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "中等重要性"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "10-task-status/phase1-frontend-update-2025-07-31T07-30-00Z.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "10-task-status/phase1-recovery-progress-2025-07-31T07-00-00Z.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "10-task-status/phase2-i18n-fix-progress-2025-07-31T08-30-00Z.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "10-task-status/phase3-team-collaboration-progress-2025-07-31T09-00-00Z.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "10-task-status/project-completion-summary-2025-07-31T09-30-00Z.md",
+      "value": {
+        "score": 9,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        }
+      ]
+    },
+    {
+      "path": "README.md",
+      "value": {
+        "score": 6,
+        "level": "high",
+        "reasons": [
+          "结构清晰",
+          "包含有用链接",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "project-structure-analysis-backup-2025-08-01.md",
+      "value": {
+        "score": 1,
+        "level": "low",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "已归档"
+        ]
+      },
+      "recommendations": [
+        {
+          "type": "review",
+          "reason": "时间戳文档，需要审查时效性"
+        },
+        {
+          "type": "archive",
+          "reason": "建议移动到归档目录"
+        }
+      ]
+    },
+    {
+      "path": "setup-guide.md",
+      "value": {
+        "score": 10,
+        "level": "high",
+        "reasons": [
+          "内容适中",
+          "结构清晰",
+          "包含代码示例",
+          "包含有用链接",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "CLEANUP_SUMMARY.md",
+      "value": {
+        "score": 5,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "value": {
+        "score": 5,
+        "level": "medium",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "中等重要性"
+        ]
+      },
+      "recommendations": []
+    },
+    {
+      "path": "PROJECT_OVERVIEW.md",
+      "value": {
+        "score": 8,
+        "level": "high",
+        "reasons": [
+          "结构清晰",
+          "包含代码示例",
+          "包含有用链接",
+          "高重要性文档"
+        ]
+      },
+      "recommendations": []
+    }
+  ],
+  "integrationSuggestions": [
+    {
+      "type": "category_merge",
+      "category": "overview",
+      "documents": [
+        "01-project-overview/project-config.md",
+        "09-reports/archived/I18N_FINAL_SOLUTION_REPORT.md",
+        "09-reports/archived/I18N_PROJECT_PLAN.md",
+        "project-structure-analysis-backup-2025-08-01.md",
+        "PROJECT_OVERVIEW.md"
+      ],
+      "reason": "overview类别有5个文档，建议整合",
+      "priority": "high"
+    },
+    {
+      "type": "category_merge",
+      "category": "development",
+      "documents": [
+        "04-development/FILE_ORGANIZATION_RULES.md",
+        "04-development/FILE_ORGANIZATION_SOLUTION.md"
+      ],
+      "reason": "development类别有2个文档，建议整合",
+      "priority": "medium"
+    },
+    {
+      "type": "category_merge",
+      "category": "setup",
+      "documents": [
+        "04-development/setup-guide.md",
+        "setup-guide.md"
+      ],
+      "reason": "setup类别有2个文档，建议整合",
+      "priority": "medium"
+    },
+    {
+      "type": "category_merge",
+      "category": "i18n",
+      "documents": [
+        "06-i18n/cost-analysis.md",
+        "06-i18n/i18n-strategy.md",
+        "06-i18n/script-usage-guide.md",
+        "06-i18n/translation-guide.md",
+        "09-reports/archived/I18N_DAY1_FINAL_REPORT.md",
+        "09-reports/archived/I18N_ULTIMATE_ACHIEVEMENT.md",
+        "10-task-status/phase2-i18n-fix-progress-2025-07-31T08-30-00Z.md"
+      ],
+      "reason": "i18n类别有7个文档，建议整合",
+      "priority": "high"
+    },
+    {
+      "type": "category_merge",
+      "category": "report",
+      "documents": [
+        "09-reports/accurate-task-status-2025-07-31.md",
+        "09-reports/analysis-reports/CLEANUP_EXECUTION_SUMMARY.md",
+        "09-reports/analysis-reports/DOCUMENT_REORGANIZATION_PLAN.md",
+        "09-reports/analysis-reports/FILE_CLEANUP_PLAN.md",
+        "09-reports/analysis-reports/FINAL_ORGANIZATION_REPORT.md",
+        "09-reports/analysis-reports/PROJECT_REALITY_CHECK.md",
+        "09-reports/analysis-reports/REALITY_BASED_ACTION_PLAN.md",
+        "09-reports/analysis-reports/SCRIPT_CLEANUP_EXECUTION.md",
+        "09-reports/analysis-reports/SCRIPT_ORGANIZATION_PLAN.md",
+        "09-reports/analysis-reports/SCRIPT_ORGANIZATION_SUMMARY.md",
+        "09-reports/analysis-reports/TASKS_REALITY_CHECK.md",
+        "09-reports/archived/INTERNATIONALIZATION_COMPLETION_REPORT.md",
+        "09-reports/archived/INTERNATIONALIZATION_PROGRESS_REPORT.md",
+        "09-reports/archived/INTERNATIONALIZATION_REALITY_CHECK.md",
+        "09-reports/archived/README.md",
+        "09-reports/code-review-executive-summary.md",
+        "09-reports/comprehensive-code-review-report.md",
+        "09-reports/final-status-summary.md",
+        "09-reports/project-ready-for-next-phase.md",
+        "09-reports/youtube-api-integration-complete.md",
+        "10-task-status/EXECUTIVE_SUMMARY.md",
+        "10-task-status/build-test-success-2025-07-31T10-30-00Z.md",
+        "10-task-status/code-review-reality-check-2025-07-31T06-00-00Z.md",
+        "10-task-status/final-reality-check-summary-2025-07-31T06-30-00Z.md",
+        "10-task-status/phase1-completion-summary-2025-07-31T08-00-00Z.md",
+        "10-task-status/phase1-frontend-update-2025-07-31T07-30-00Z.md",
+        "10-task-status/phase1-recovery-progress-2025-07-31T07-00-00Z.md",
+        "10-task-status/phase3-team-collaboration-progress-2025-07-31T09-00-00Z.md",
+        "10-task-status/project-completion-summary-2025-07-31T09-30-00Z.md"
+      ],
+      "reason": "report类别有29个文档，建议整合",
+      "priority": "high"
+    },
+    {
+      "type": "category_merge",
+      "category": "deployment",
+      "documents": [
+        "10-task-status/deployment-ready-2025-07-31T10-00-00Z.md",
+        "DEPLOYMENT.md"
+      ],
+      "reason": "deployment类别有2个文档，建议整合",
+      "priority": "medium"
+    },
+    {
+      "type": "category_merge",
+      "category": "general",
+      "documents": [
+        "README.md",
+        "CLEANUP_SUMMARY.md"
+      ],
+      "reason": "general类别有2个文档，建议整合",
+      "priority": "medium"
+    }
+  ],
+  "recommendations": [
+    {
+      "type": "integration",
+      "priority": "high",
+      "message": "发现 3 个高优先级整合机会",
+      "details": [
+        {
+          "type": "category_merge",
+          "category": "overview",
+          "documents": [
+            "01-project-overview/project-config.md",
+            "09-reports/archived/I18N_FINAL_SOLUTION_REPORT.md",
+            "09-reports/archived/I18N_PROJECT_PLAN.md",
+            "project-structure-analysis-backup-2025-08-01.md",
+            "PROJECT_OVERVIEW.md"
+          ],
+          "reason": "overview类别有5个文档，建议整合",
+          "priority": "high"
+        },
+        {
+          "type": "category_merge",
+          "category": "i18n",
+          "documents": [
+            "06-i18n/cost-analysis.md",
+            "06-i18n/i18n-strategy.md",
+            "06-i18n/script-usage-guide.md",
+            "06-i18n/translation-guide.md",
+            "09-reports/archived/I18N_DAY1_FINAL_REPORT.md",
+            "09-reports/archived/I18N_ULTIMATE_ACHIEVEMENT.md",
+            "10-task-status/phase2-i18n-fix-progress-2025-07-31T08-30-00Z.md"
+          ],
+          "reason": "i18n类别有7个文档，建议整合",
+          "priority": "high"
+        },
+        {
+          "type": "category_merge",
+          "category": "report",
+          "documents": [
+            "09-reports/accurate-task-status-2025-07-31.md",
+            "09-reports/analysis-reports/CLEANUP_EXECUTION_SUMMARY.md",
+            "09-reports/analysis-reports/DOCUMENT_REORGANIZATION_PLAN.md",
+            "09-reports/analysis-reports/FILE_CLEANUP_PLAN.md",
+            "09-reports/analysis-reports/FINAL_ORGANIZATION_REPORT.md",
+            "09-reports/analysis-reports/PROJECT_REALITY_CHECK.md",
+            "09-reports/analysis-reports/REALITY_BASED_ACTION_PLAN.md",
+            "09-reports/analysis-reports/SCRIPT_CLEANUP_EXECUTION.md",
+            "09-reports/analysis-reports/SCRIPT_ORGANIZATION_PLAN.md",
+            "09-reports/analysis-reports/SCRIPT_ORGANIZATION_SUMMARY.md",
+            "09-reports/analysis-reports/TASKS_REALITY_CHECK.md",
+            "09-reports/archived/INTERNATIONALIZATION_COMPLETION_REPORT.md",
+            "09-reports/archived/INTERNATIONALIZATION_PROGRESS_REPORT.md",
+            "09-reports/archived/INTERNATIONALIZATION_REALITY_CHECK.md",
+            "09-reports/archived/README.md",
+            "09-reports/code-review-executive-summary.md",
+            "09-reports/comprehensive-code-review-report.md",
+            "09-reports/final-status-summary.md",
+            "09-reports/project-ready-for-next-phase.md",
+            "09-reports/youtube-api-integration-complete.md",
+            "10-task-status/EXECUTIVE_SUMMARY.md",
+            "10-task-status/build-test-success-2025-07-31T10-30-00Z.md",
+            "10-task-status/code-review-reality-check-2025-07-31T06-00-00Z.md",
+            "10-task-status/final-reality-check-summary-2025-07-31T06-30-00Z.md",
+            "10-task-status/phase1-completion-summary-2025-07-31T08-00-00Z.md",
+            "10-task-status/phase1-frontend-update-2025-07-31T07-30-00Z.md",
+            "10-task-status/phase1-recovery-progress-2025-07-31T07-00-00Z.md",
+            "10-task-status/phase3-team-collaboration-progress-2025-07-31T09-00-00Z.md",
+            "10-task-status/project-completion-summary-2025-07-31T09-30-00Z.md"
+          ],
+          "reason": "report类别有29个文档，建议整合",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "type": "cleanup",
+      "priority": "medium",
+      "message": "发现 2 个低价值文档，建议清理",
+      "details": [
+        "09-reports/archived/I18N_DAY1_FINAL_REPORT.md",
+        "09-reports/archived/INTERNATIONALIZATION_PROGRESS_REPORT.md"
+      ]
+    }
+  ]
+}

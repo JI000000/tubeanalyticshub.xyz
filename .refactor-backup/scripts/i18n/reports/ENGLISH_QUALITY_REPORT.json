@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-07-29T06:08:26.430Z",
+  "statistics": {
+    "totalKeys": 0,
+    "issuesFound": 0,
+    "filesChecked": 0
+  },
+  "issues": [],
+  "summary": {
+    "qualityScore": 0,
+    "issuesBySeverity": {
+      "high": [],
+      "medium": [],
+      "low": []
+    },
+    "topIssueTypes": []
+  }
+}
