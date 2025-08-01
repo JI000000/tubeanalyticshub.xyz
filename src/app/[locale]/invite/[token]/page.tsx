@@ -259,7 +259,7 @@ export default function InviteAcceptPage() {
             </div>
             <CardTitle className="text-2xl">Team Invitation</CardTitle>
             <p className="text-gray-600">
-              You've been invited to join a team
+              You&apos;ve been invited to join a team
             </p>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -352,7 +352,7 @@ export default function InviteAcceptPage() {
               <Alert variant="destructive">
                 <AlertTriangle className="h-4 w-4" />
                 <AlertDescription>
-                  This invitation was sent to {invitation.invitee_email}, but you're logged in as {user?.email}. 
+                  This invitation was sent to {invitation.invitee_email}, but you&apos;re logged in as {user?.email}. 
                   Please log in with the correct email address.
                 </AlertDescription>
               </Alert>

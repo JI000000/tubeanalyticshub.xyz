@@ -10,10 +10,10 @@ const supabase = createClient(
 // GET /api/analytics/reports/[id] - 获取特定报告
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
     const shareToken = searchParams.get('token');
@@ -84,10 +84,10 @@ export async function GET(
 // PUT /api/analytics/reports/[id] - 更新报告
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const body = await request.json();
     const { userId, title, content, metadata, is_public } = body;
 
@@ -124,7 +124,7 @@ export async function PUT(
     if (metadata !== undefined) updateData.metadata = metadata;
     if (is_public !== undefined) {
       updateData.is_public = is_public;
-      if (is_public && !existingReport.share_token) {
+      if (is_public && !(existingReport as any).share_token) {
         updateData.share_token = generateShareToken();
       }
     }
@@ -159,10 +159,10 @@ export async function PUT(
 // DELETE /api/analytics/reports/[id] - 删除报告
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
 

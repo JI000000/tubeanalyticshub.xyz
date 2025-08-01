@@ -10,10 +10,10 @@ const supabase = createClient(
 // GET /api/analytics/insights/[id] - 获取特定洞察详情
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
 
@@ -97,10 +97,10 @@ export async function GET(
 // PUT /api/analytics/insights/[id] - 更新洞察（如标记为已读、有用等）
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const body = await request.json();
     const { userId, action, feedback } = body;
 
@@ -213,10 +213,10 @@ export async function PUT(
 // DELETE /api/analytics/insights/[id] - 删除洞察
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
 

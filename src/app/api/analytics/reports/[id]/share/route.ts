@@ -10,10 +10,10 @@ const supabase = createClient(
 // POST /api/analytics/reports/[id]/share - 创建或更新报告分享
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const body = await request.json();
     const { userId, is_public, expires_at, password } = body;
 
@@ -55,7 +55,7 @@ export async function POST(
     // 如果设置了过期时间，添加到metadata中
     if (expires_at) {
       updateData.metadata = {
-        ...report.metadata,
+        ...(report as any).metadata,
         share_expires_at: expires_at,
         share_password: password ? hashPassword(password) : null
       };
@@ -103,10 +103,10 @@ export async function POST(
 // GET /api/analytics/reports/[id]/share - 获取分享信息
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
 
@@ -163,10 +163,10 @@ export async function GET(
 // DELETE /api/analytics/reports/[id]/share - 取消分享
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
     const { searchParams } = new URL(request.url);
     const userId = searchParams.get('userId');
 

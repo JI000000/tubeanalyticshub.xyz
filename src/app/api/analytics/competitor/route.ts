@@ -334,7 +334,7 @@ export async function GET(request: NextRequest) {
     }
 
     // 生成新的竞品分析
-    const analysis = await CompetitorAnalyzer.analyzeCompetitors(userId, channelId);
+    const analysis = await CompetitorAnalyzer.analyzeCompetitors(userId, channelId || '');
 
     return NextResponse.json({
       success: true,
