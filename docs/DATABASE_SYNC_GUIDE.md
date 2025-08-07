@@ -27,10 +27,12 @@
    - 点击左侧菜单的 "SQL Editor"
    - 点击 "New query"
 
-3. **执行schema.sql**
-   - 打开项目中的 `supabase/schema.sql` 文件
+3. **执行修复版本的schema.sql**
+   - 打开项目中的 `supabase/schema-fixed.sql` 文件（修复版本）
    - 复制全部内容到SQL编辑器
    - 点击 "Run" 执行
+   
+   **注意**: 原始 `schema.sql` 有依赖关系错误，请使用 `schema-fixed.sql`
 
 4. **验证结果**
    - 执行完成后，检查 "Table Editor" 中是否出现所有表
