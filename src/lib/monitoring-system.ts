@@ -192,74 +192,40 @@ class MonitoringSystem {
    * 获取登录统计数据
    */
   private async getLoginStats(startTime: Date, endTime: Date) {
-    try {
-      const { data: loginEvents } = await supabase
-        .from('yt_login_analytics')
-        .select('event_type, user_id')
-        .gte('created_at', startTime.toISOString())
-        .lte('created_at', endTime.toISOString())
-
-      if (!loginEvents) {
-        return { successRate: 0, failureRate: 0, activeUsers: 0 }
-      }
-
-      const totalAttempts = loginEvents.filter(e => 
-        e.event_type === 'login_attempt'
-      ).length
-
-      const successfulLogins = loginEvents.filter(e => 
-        e.event_type === 'login_success'
-      ).length
-
-      const failedLogins = loginEvents.filter(e => 
-        e.event_type === 'login_failed'
-      ).length
-
-      const activeUsers = new Set(
-        loginEvents
-          .filter(e => e.event_type === 'login_success')
-          .map(e => e.user_id)
-      ).size
-
-      const successRate = totalAttempts > 0 ? (successfulLogins / totalAttempts) * 100 : 0
-      const failureRate = totalAttempts > 0 ? (failedLogins / totalAttempts) * 100 : 0
-
-      return {
-        successRate,
-        failureRate,
-        activeUsers
-      }
-    } catch (error) {
-      console.error('获取登录统计失败:', error)
-      return { successRate: 0, failureRate: 0, activeUsers: 0 }
-    }
+    if (!supabase) throw new Error('Supabase client not initialized');
+    const { data: loginEvents } = await supabase
+      .from('yt_login_analytics')
+      .select('event_type, user_id')
+      .gte('created_at', startTime.toISOString())
+      .lte('created_at', endTime.toISOString());
+    const events = loginEvents || [];
+    const total = events.length;
+    const success = events.filter(e => e.event_type === 'success').length;
+    const failure = events.filter(e => e.event_type === 'failure').length;
+    const users = new Set(events.map(e => e.user_id)).size;
+    return {
+      successRate: total ? (success / total) * 100 : 0,
+      failureRate: total ? (failure / total) * 100 : 0,
+      activeUsers: users
+    };
   }
 
   /**
    * 获取试用转化统计
    */
   private async getTrialStats(startTime: Date, endTime: Date) {
-    try {
-      const { data: trialData } = await supabase
-        .from('yt_anonymous_trials')
-        .select('converted_user_id, created_at')
-        .gte('created_at', startTime.toISOString())
-        .lte('created_at', endTime.toISOString())
-
-      if (!trialData) {
-        return { conversionRate: 0 }
-      }
-
-      const totalTrials = trialData.length
-      const convertedTrials = trialData.filter(t => t.converted_user_id).length
-
-      const conversionRate = totalTrials > 0 ? (convertedTrials / totalTrials) * 100 : 0
-
-      return { conversionRate }
-    } catch (error) {
-      console.error('获取试用统计失败:', error)
-      return { conversionRate: 0 }
-    }
+    if (!supabase) throw new Error('Supabase client not initialized');
+    const { data: trialData } = await supabase
+      .from('yt_anonymous_trials')
+      .select('user_id, created_at, converted')
+      .gte('created_at', startTime.toISOString())
+      .lte('created_at', endTime.toISOString());
+    const trials = trialData || [];
+    const total = trials.length;
+    const converted = trials.filter(t => t.converted).length;
+    return {
+      conversionRate: total ? (converted / total) * 100 : 0
+    };
   }
 
   /**
@@ -282,16 +248,12 @@ class MonitoringSystem {
    * 检查数据库连接
    */
   private async checkDatabaseConnection(): Promise<boolean> {
+    if (!supabase) return false;
     try {
-      const { error } = await supabase
-        .from('users')
-        .select('count')
-        .limit(1)
-
-      return !error
-    } catch (error) {
-      console.error('数据库连接检查失败:', error)
-      return false
+      const { error } = await supabase.from('yt_users').select('id').limit(1);
+      return !error;
+    } catch {
+      return false;
     }
   }
 
@@ -299,24 +261,8 @@ class MonitoringSystem {
    * 存储指标到数据库
    */
   private async storeMetrics(metrics: SystemMetrics) {
-    try {
-      await supabase
-        .from('yt_system_metrics')
-        .insert({
-          timestamp: metrics.timestamp.toISOString(),
-          login_success_rate: metrics.loginSuccessRate,
-          login_failure_rate: metrics.loginFailureRate,
-          avg_response_time: metrics.avgResponseTime,
-          active_users: metrics.activeUsers,
-          trial_conversion_rate: metrics.trialConversionRate,
-          db_connection_status: metrics.dbConnectionStatus,
-          api_error_rate: metrics.apiErrorRate,
-          memory_usage: metrics.memoryUsage,
-          cpu_usage: metrics.cpuUsage
-        })
-    } catch (error) {
-      console.error('存储指标失败:', error)
-    }
+    if (!supabase) throw new Error('Supabase client not initialized');
+    await supabase.from('yt_system_metrics').insert([metrics]);
   }
 
   /**
@@ -466,21 +412,8 @@ class MonitoringSystem {
    * 存储告警记录
    */
   private async storeAlert(alert: AlertNotification) {
-    try {
-      await supabase
-        .from('yt_system_alerts')
-        .insert({
-          id: alert.id,
-          rule_id: alert.ruleId,
-          message: alert.message,
-          severity: alert.severity,
-          context: alert.context,
-          created_at: alert.createdAt.toISOString(),
-          resolved: alert.resolved
-        })
-    } catch (error) {
-      console.error('存储告警记录失败:', error)
-    }
+    if (!supabase) throw new Error('Supabase client not initialized');
+    await supabase.from('yt_alerts').insert([alert]);
   }
 
   /**
@@ -509,22 +442,8 @@ class MonitoringSystem {
    * 解决告警
    */
   public async resolveAlert(alertId: string) {
-    const alert = this.activeAlerts.get(alertId)
-    if (alert) {
-      alert.resolved = true
-      alert.resolvedAt = new Date()
-
-      // 更新数据库记录
-      await supabase
-        .from('yt_system_alerts')
-        .update({
-          resolved: true,
-          resolved_at: alert.resolvedAt.toISOString()
-        })
-        .eq('id', alertId)
-
-      console.log(`✅ 告警已解决: ${alert.message}`)
-    }
+    if (!supabase) throw new Error('Supabase client not initialized');
+    await supabase.from('yt_alerts').update({ resolved: true, resolvedAt: new Date() }).eq('id', alertId);
   }
 
   /**

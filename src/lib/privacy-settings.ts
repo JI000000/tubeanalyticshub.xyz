@@ -418,13 +418,14 @@ class PrivacySettingsService {
       let deletedCount = 0
 
       // 删除过期的登录日志
-      const { data: deletedLogs } = await this.supabase
+      const { data: deletedLogs }: { data: any[] | null } = await this.supabase
         .from('yt_login_security_logs')
         .delete()
         .eq('user_id', ytUserId)
         .lt('created_at', cutoffDate.toISOString())
 
-      deletedCount += deletedLogs?.length || 0
+      const logs = deletedLogs ?? [];
+      deletedCount += logs.length;
 
       // 记录清理操作
       await this.logGDPRCompliance({
@@ -605,4 +606,3 @@ class PrivacySettingsService {
 export const privacySettingsService = new PrivacySettingsService()
 
 // 导出类型
-export type { PrivacySettings, DataDeletionRequest, GDPRComplianceLog }

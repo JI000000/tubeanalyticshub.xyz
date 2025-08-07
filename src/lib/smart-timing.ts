@@ -593,7 +593,7 @@ export class SmartTimingEngine {
         confidence: 0.8,
         characteristics: {
           averageSessionTime: avgSessionTime,
-          featuresUsed: Array.from(uniqueFeatures),
+          featuresUsed: Array.from(uniqueFeatures).filter((f): f is string => typeof f === 'string'),
           navigationPattern: 'focused',
           interactionDepth: 'deep',
         },
@@ -604,7 +604,7 @@ export class SmartTimingEngine {
         confidence: 0.7,
         characteristics: {
           averageSessionTime: avgSessionTime,
-          featuresUsed: Array.from(uniqueFeatures),
+          featuresUsed: Array.from(uniqueFeatures).filter((f): f is string => typeof f === 'string'),
           navigationPattern: 'random',
           interactionDepth: 'medium',
         },
@@ -615,7 +615,7 @@ export class SmartTimingEngine {
         confidence: 0.8,
         characteristics: {
           averageSessionTime: avgSessionTime,
-          featuresUsed: Array.from(uniqueFeatures),
+          featuresUsed: Array.from(uniqueFeatures).filter((f): f is string => typeof f === 'string'),
           navigationPattern: 'linear',
           interactionDepth: 'medium',
         },
@@ -626,7 +626,7 @@ export class SmartTimingEngine {
         confidence: 0.6,
         characteristics: {
           averageSessionTime: avgSessionTime,
-          featuresUsed: Array.from(uniqueFeatures),
+          featuresUsed: Array.from(uniqueFeatures).filter((f): f is string => typeof f === 'string'),
           navigationPattern: 'random',
           interactionDepth: 'shallow',
         },

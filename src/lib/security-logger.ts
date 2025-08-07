@@ -77,7 +77,7 @@ class SecurityLogger {
     loginMethod?: string
   ): Promise<void> {
     await this.logSecurityEvent({
-      userId: await this.getYtUserId(session.user.id),
+      userId: (await this.getYtUserId(session.user.id)) ?? undefined,
       nextauthUserId: session.user.id,
       eventType: 'login_success',
       loginMethod: (loginMethod as any) || session.user.provider,
@@ -125,7 +125,7 @@ class SecurityLogger {
     reason?: string
   ): Promise<void> {
     await this.logSecurityEvent({
-      userId: await this.getYtUserId(session.user.id),
+      userId: (await this.getYtUserId(session.user.id)) ?? undefined,
       nextauthUserId: session.user.id,
       eventType: 'logout',
       ipAddress,
@@ -358,17 +358,14 @@ class SecurityLogger {
       const cutoffDate = new Date()
       cutoffDate.setDate(cutoffDate.getDate() - retentionDays)
 
-      const { data, error } = await this.supabase
+      const { data }: { data: any[] | null } = await this.supabase
         .from('yt_login_security_logs')
         .delete()
         .lt('created_at', cutoffDate.toISOString())
 
-      if (error) {
-        console.error('Error cleaning up expired logs:', error)
-        return 0
-      }
+      const logs = data ?? [];
+      return logs.length;
 
-      return data?.length || 0
     } catch (error) {
       console.error('Error cleaning up expired logs:', error)
       return 0
@@ -448,4 +445,3 @@ class SecurityLogger {
 export const securityLogger = new SecurityLogger()
 
 // 导出类型
-export type { SecurityAnalytics, LoginAnomalyData }

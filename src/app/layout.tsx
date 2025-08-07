@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { GoogleAnalytics, GoogleAdSense } from '@/components/analytics/google-analytics';
 import { Providers } from '@/components/providers/providers';
 
 // 使用系统字体，避免 Google Fonts 加载问题
@@ -22,9 +21,7 @@ export const metadata: Metadata = {
     title: 'YouTube Analytics Platform',
     description: 'AI-powered YouTube analytics and insights platform',
   },
-  other: {
-    'google-adsense-account': 'ca-pub-9751155071098091',
-  },
+
 };
 
 export default function RootLayout({
@@ -34,12 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <meta name="google-adsense-account" content="ca-pub-9751155071098091" />
-      </head>
       <body className="font-sans antialiased">
-        <GoogleAnalytics />
-        <GoogleAdSense />
         <Providers>
           {children}
         </Providers>
