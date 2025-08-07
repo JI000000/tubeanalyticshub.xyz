@@ -210,9 +210,7 @@ npx supabase db reset
 ## 📚 文档
 
 - [实现总结](./docs/IMPLEMENTATION_SUMMARY.md)
-- [API 文档](./docs/API_DOCUMENTATION.md)
-- [部署指南](./docs/DEPLOYMENT_GUIDE.md)
-- [故障排除](./docs/TROUBLESHOOTING_FAQ.md)
+- [部署指南](./docs/DEPLOYMENT.md)
 
 ## 🤝 贡献
 
