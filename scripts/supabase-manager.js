@@ -180,13 +180,11 @@ async function syncDatabaseStructure() {
   log('📝 请手动执行以下步骤:', 'yellow');
   log('1. 打开 Supabase Dashboard', 'cyan');
   log('2. 进入 SQL Editor', 'cyan');
-  log('3. 执行 supabase/schema-incremental-fixed.sql', 'cyan');
+  log('3. 执行 supabase/schema.sql', 'cyan');
   log('4. 验证所有表创建成功', 'cyan');
   
   log('\n📁 相关文件:', 'bright');
-  log('   - supabase/schema-incremental-fixed.sql (推荐)', 'green');
-  log('   - supabase/schema-incremental.sql (备选)', 'yellow');
-  log('   - supabase/schema-fixed.sql (完整重建)', 'red');
+  log('   - supabase/schema.sql (推荐)', 'green');
   
   log('\n⚠️  注意: 自动化同步不可用，请手动执行SQL脚本', 'yellow');
 }
@@ -198,7 +196,7 @@ async function manageRLS() {
   log('📝 请手动执行以下步骤:', 'yellow');
   log('1. 打开 Supabase Dashboard', 'cyan');
   log('2. 进入 SQL Editor', 'cyan');
-  log('3. 执行 supabase/rls-management.sql', 'cyan');
+  log('3. 执行 supabase/rls.sql', 'cyan');
   log('4. 验证RLS策略创建成功', 'cyan');
   
   log('\n🔧 RLS管理功能:', 'bright');
@@ -217,7 +215,7 @@ async function renameNextAuthTables() {
   log('📝 请手动执行以下步骤:', 'yellow');
   log('1. 打开 Supabase Dashboard', 'cyan');
   log('2. 进入 SQL Editor', 'cyan');
-  log('3. 执行 supabase/rename-tables.sql', 'cyan');
+  log('3. 执行 supabase/rename-nextauth.sql', 'cyan');
   log('4. 验证表重命名成功', 'cyan');
   
   log('\n🔄 重命名操作:', 'bright');
@@ -241,9 +239,9 @@ function showHelp() {
   log('  npm run db:help      - 显示此帮助信息', 'cyan');
   
   log('\n📁 相关文件:', 'bright');
-  log('  supabase/schema-incremental-fixed.sql  - 推荐的结构文件', 'green');
-  log('  supabase/rls-management.sql           - RLS管理脚本', 'green');
-  log('  supabase/rename-tables.sql            - 表重命名脚本', 'green');
+  log('  supabase/schema.sql                   - 推荐的结构文件', 'green');
+  log('  supabase/rls.sql                      - RLS管理脚本', 'green');
+  log('  supabase/rename-nextauth.sql          - 表重命名脚本', 'green');
   
   log('\n💡 提示:', 'yellow');
   log('  - 所有SQL操作需要在Supabase Dashboard中手动执行', 'yellow');

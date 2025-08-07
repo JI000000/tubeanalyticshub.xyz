@@ -39,24 +39,23 @@ npm run db:rename
 
 | 文件名 | 用途 | 推荐度 |
 |--------|------|--------|
-| `schema-incremental-fixed.sql` | **推荐** - 增量更新，包含NextAuth表重命名 | ⭐⭐⭐⭐⭐ |
-| `rls-management.sql` | **推荐** - RLS策略管理工具 | ⭐⭐⭐⭐⭐ |
-| `rename-tables.sql` | **推荐** - NextAuth表重命名 | ⭐⭐⭐⭐⭐ |
+| `schema.sql` | **推荐** - 完整的数据库结构文件 | ⭐⭐⭐⭐⭐ |
+| `rls.sql` | **推荐** - RLS策略管理工具 | ⭐⭐⭐⭐⭐ |
+| `rename-nextauth.sql` | **推荐** - NextAuth表重命名 | ⭐⭐⭐⭐⭐ |
 
-### 备选脚本文件
+### 配置文件
 
-| 文件名 | 用途 | 推荐度 |
-|--------|------|--------|
-| `schema-incremental.sql` | 备选 - 增量更新（旧版NextAuth表名） | ⭐⭐⭐ |
-| `schema-fixed.sql` | 备选 - 完整重建（可能重复创建） | ⭐⭐ |
-| `schema.sql` | 不推荐 - 原始版本（有依赖错误） | ⭐ |
+| 文件名 | 用途 | 说明 |
+|--------|------|------|
+| `config.toml` | Supabase配置 | 本地开发配置 |
+| `.gitignore` | Git忽略文件 | 忽略临时文件 |
 
 ## 执行顺序
 
 ### 首次设置
-1. **重命名NextAuth表** → 执行 `rename-tables.sql`
-2. **同步数据库结构** → 执行 `schema-incremental-fixed.sql`
-3. **管理RLS策略** → 执行 `rls-management.sql`
+1. **重命名NextAuth表** → 执行 `rename-nextauth.sql`
+2. **同步数据库结构** → 执行 `schema.sql`
+3. **管理RLS策略** → 执行 `rls.sql`
 
 ### 日常维护
 1. **检查状态** → `npm run db:check`
@@ -71,7 +70,7 @@ npm run db:rename
 **执行步骤**:
 1. 打开 Supabase Dashboard
 2. 进入 SQL Editor
-3. 复制 `supabase/rename-tables.sql` 内容
+3. 复制 `supabase/rename-nextauth.sql` 内容
 4. 点击 "Run" 执行
 
 **重命名内容**:
@@ -87,13 +86,14 @@ npm run db:rename
 **执行步骤**:
 1. 打开 Supabase Dashboard
 2. 进入 SQL Editor
-3. 复制 `supabase/schema-incremental-fixed.sql` 内容
+3. 复制 `supabase/schema.sql` 内容
 4. 点击 "Run" 执行
 
 **特点**:
 - 使用 `IF NOT EXISTS` 避免重复创建
 - 包含所有必需的表和索引
 - 支持增量更新
+- 包含完整的数据库结构
 
 ### 3. RLS安全策略管理
 
@@ -102,7 +102,7 @@ npm run db:rename
 **执行步骤**:
 1. 打开 Supabase Dashboard
 2. 进入 SQL Editor
-3. 复制 `supabase/rls-management.sql` 内容
+3. 复制 `supabase/rls.sql` 内容
 4. 点击 "Run" 执行
 
 **功能**:
@@ -175,7 +175,7 @@ FOR SELECT USING (
 
 1. **"relation does not exist"**
    - 原因: 表不存在
-   - 解决: 执行 `schema-incremental-fixed.sql`
+   - 解决: 执行 `schema.sql`
 
 2. **"trigger already exists"**
    - 原因: 触发器已存在

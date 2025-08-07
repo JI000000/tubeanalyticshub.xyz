@@ -1,5 +1,37 @@
--- NextAuth表名重命名脚本
--- 将NextAuth相关表名加上yt_前缀，符合团队命名规范
+-- ========================================
+-- NextAuth Table Renaming Tool
+-- ========================================
+-- 
+-- YouTube Analytics Platform NextAuth表重命名脚本
+-- 将NextAuth相关表重命名为yt_前缀，符合团队命名规范
+-- 
+-- 重命名内容：
+-- - accounts → yt_accounts
+-- - sessions → yt_sessions
+-- - users → yt_users_auth
+-- - verification_tokens → yt_verification_tokens
+-- 
+-- 包含操作：
+-- 1. 重命名表
+-- 2. 重命名相关索引
+-- 3. 重新创建触发器
+-- 4. 启用RLS并创建策略
+-- 5. 验证重命名结果
+-- 
+-- 注意事项：
+-- - 执行前请备份数据
+-- - 重命名后需要更新应用配置
+-- - 建议在测试环境先验证
+-- 
+-- 使用方法：
+-- 1. 在Supabase Dashboard的SQL Editor中执行
+-- 2. 验证所有表重命名成功
+-- 3. 更新NextAuth配置中的表名
+-- 
+-- 作者：YouTube Analytics Platform Team
+-- 版本：1.0.0
+-- 更新时间：2025-01-07
+-- ========================================
 
 -- ========================================
 -- 1. 重命名表
