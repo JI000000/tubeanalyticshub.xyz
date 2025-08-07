@@ -372,10 +372,10 @@ END $$;
 DO $$ 
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'update_yt_teams_updated_at') THEN
-        CREATE TRIGGER update_yt_teams_updated_at 
-            BEFORE UPDATE ON yt_teams 
-            FOR EACH ROW 
-            EXECUTE FUNCTION update_updated_at_column();
+CREATE TRIGGER update_yt_teams_updated_at 
+    BEFORE UPDATE ON yt_teams 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
     END IF;
 END $$;
 
@@ -402,10 +402,10 @@ END $$;
 DO $$ 
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_trigger WHERE tgname = 'update_yt_collaboration_comments_updated_at') THEN
-        CREATE TRIGGER update_yt_collaboration_comments_updated_at 
-            BEFORE UPDATE ON yt_collaboration_comments 
-            FOR EACH ROW 
-            EXECUTE FUNCTION update_updated_at_column();
+CREATE TRIGGER update_yt_collaboration_comments_updated_at 
+    BEFORE UPDATE ON yt_collaboration_comments 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
     END IF;
 END $$;
 
