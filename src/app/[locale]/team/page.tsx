@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useSmartAuth } from '@/hooks/useSmartAuth';
 import { AppShell } from '@/components/layout/app-shell';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
+import { LoginRequiredButton, FeatureAccessIndicator } from '@/components/auth/LoginRequiredWrapper';
 import { Users, Plus, Mail, Crown, Shield, Edit, Trash2, Settings, UserPlus, Calendar, MoreVertical, Check, X } from 'lucide-react';
 
 interface TeamMember {
@@ -35,6 +37,7 @@ interface Team {
 
 export default function TeamPage() {
   const { t } = useTranslation();
+  const { requireAuth } = useSmartAuth();
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -44,8 +47,60 @@ export default function TeamPage() {
 
   const userId = '00000000-0000-0000-0000-000000000001';
 
+  // 处理团队管理访问
+  const handleTeamManagement = async () => {
+    const canProceed = await requireAuth('team_collaboration', {
+      message: '团队管理功能需要登录，与团队成员协作分析',
+      urgency: 'medium',
+      metadata: { type: 'team_management' }
+    });
+    
+    if (canProceed) {
+      await fetchTeams();
+    }
+  };
+
+  // 处理创建团队
+  const handleCreateTeam = async () => {
+    const canProceed = await requireAuth('team_collaboration', {
+      message: '创建团队需要登录，开始团队协作',
+      urgency: 'high',
+      metadata: { type: 'create_team' }
+    });
+    
+    if (canProceed) {
+      await createTeam();
+    }
+  };
+
+  // 处理邀请成员
+  const handleInviteMember = async (teamId: string) => {
+    const canProceed = await requireAuth('team_collaboration', {
+      message: '邀请团队成员需要登录验证',
+      urgency: 'high',
+      metadata: { teamId, type: 'invite_member' }
+    });
+    
+    if (canProceed) {
+      await inviteMember(teamId);
+    }
+  };
+
+  // 处理移除成员
+  const handleRemoveMember = async (teamId: string, memberId: string) => {
+    const canProceed = await requireAuth('team_collaboration', {
+      message: '管理团队成员需要登录验证',
+      urgency: 'high',
+      metadata: { teamId, memberId, type: 'remove_member' }
+    });
+    
+    if (canProceed) {
+      await removeMember(teamId, memberId);
+    }
+  };
+
   useEffect(() => {
-    fetchTeams();
+    handleTeamManagement();
   }, []);
 
   const fetchTeams = async () => {
@@ -220,13 +275,20 @@ export default function TeamPage() {
         {/* Header */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Team Management</h1>
+            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              Team Management
+              <FeatureAccessIndicator featureId="team_collaboration" size="sm" />
+            </h1>
             <p className="text-gray-500">Manage your team members and collaboration permissions</p>
           </div>
-          <Button onClick={() => setShowCreateForm(true)}>
+          <LoginRequiredButton
+            featureId="team_collaboration"
+            onClick={() => setShowCreateForm(true)}
+            data-feature="create-team"
+          >
             <Plus className="h-4 w-4 mr-2" />
             Create Team
-          </Button>
+          </LoginRequiredButton>
         </div>
 
         {/* Create Team Form */}
@@ -254,9 +316,14 @@ export default function TeamPage() {
                 />
               </div>
               <div className="flex gap-2">
-                <Button onClick={createTeam} disabled={!newTeam.name}>
+                <LoginRequiredButton
+                  featureId="team_collaboration"
+                  onClick={handleCreateTeam}
+                  disabled={!newTeam.name}
+                  data-feature="create-team"
+                >
                   Create Team
-                </Button>
+                </LoginRequiredButton>
                 <Button variant="outline" onClick={() => setShowCreateForm(false)}>
                   Cancel
                 </Button>
@@ -274,10 +341,14 @@ export default function TeamPage() {
               <p className="text-gray-500 mb-4">
                 Create your first team to start collaborating with colleagues on YouTube data analysis
               </p>
-              <Button onClick={() => setShowCreateForm(true)}>
+              <LoginRequiredButton
+                featureId="team_collaboration"
+                onClick={() => setShowCreateForm(true)}
+                data-feature="create-first-team"
+              >
                 <Plus className="h-4 w-4 mr-2" />
                 Create first team
-              </Button>
+              </LoginRequiredButton>
             </CardContent>
           </Card>
         ) : (
@@ -301,14 +372,16 @@ export default function TeamPage() {
                         <span className="ml-1">{getRoleLabel(team.userRole)}</span>
                       </Badge>
                       {canInviteMembers(team.userRole) && (
-                        <Button
+                        <LoginRequiredButton
+                          featureId="team_collaboration"
                           size="sm"
                           variant="outline"
                           onClick={() => setShowInviteForm(team.id)}
+                          data-feature="invite-member"
                         >
                           <UserPlus className="h-4 w-4 mr-1" />
                           Invite Member
-                        </Button>
+                        </LoginRequiredButton>
                       )}
                     </div>
                   </div>
@@ -335,14 +408,16 @@ export default function TeamPage() {
                           <option value="admin">Admin</option>
                         </select>
                         <div className="flex gap-2">
-                          <Button
+                          <LoginRequiredButton
+                            featureId="team_collaboration"
                             size="sm"
-                            onClick={() => inviteMember(team.id)}
+                            onClick={() => handleInviteMember(team.id)}
                             disabled={!inviteData.email}
+                            data-feature="send-invitation"
                           >
                             <Check className="h-4 w-4 mr-1" />
                             Send Invitation
-                          </Button>
+                          </LoginRequiredButton>
                           <Button
                             size="sm"
                             variant="outline"
@@ -386,13 +461,15 @@ export default function TeamPage() {
                             {canRemoveMembers(team.userRole) && 
                              member.role !== 'owner' && 
                              member.user_id !== userId && (
-                              <Button
+                              <LoginRequiredButton
+                                featureId="team_collaboration"
                                 size="sm"
                                 variant="ghost"
-                                onClick={() => removeMember(team.id, member.user_id)}
+                                onClick={() => handleRemoveMember(team.id, member.user_id)}
+                                data-feature="remove-member"
                               >
                                 <Trash2 className="h-4 w-4 text-red-600" />
-                              </Button>
+                              </LoginRequiredButton>
                             )}
                           </div>
                         </div>

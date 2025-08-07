@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react';
 import { AppShell } from '@/components/layout/app-shell';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useAuth } from '@/hooks/useAuth';
+import { useSmartAuth } from '@/hooks/useSmartAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { LoginRequiredButton, FeatureAccessIndicator } from '@/components/auth/LoginRequiredWrapper';
 import { 
   FileText, 
   Download, 
@@ -18,7 +20,8 @@ import {
   BarChart3,
   TrendingUp,
   Users,
-  Eye
+  Eye,
+  Save
 } from 'lucide-react';
 
 interface ReportData {
@@ -42,11 +45,80 @@ interface ReportData {
 export default function ReportsPage() {
   const { t } = useTranslation();
   const { getUserId, isAuthenticated, loading: authLoading } = useAuth();
+  const { requireAuth, shouldShowTrialIndicator } = useSmartAuth();
   const [reports, setReports] = useState<ReportData[]>([]);
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
   const [newReportTitle, setNewReportTitle] = useState('');
   const [selectedType, setSelectedType] = useState('performance');
+
+  // 处理创建报告
+  const handleCreateReport = async () => {
+    const canProceed = await requireAuth('generate_report', {
+      allowTrial: true,
+      trialAction: 'save_report',
+      message: '创建报告需要登录或使用试用次数',
+      urgency: 'high',
+      metadata: { reportType: selectedType, title: newReportTitle }
+    });
+    
+    if (canProceed) {
+      await createReport();
+    }
+  };
+
+  // 处理保存报告
+  const handleSaveReport = async (reportId: string) => {
+    const canProceed = await requireAuth('save_report', {
+      message: '保存报告需要登录，确保您的分析成果不会丢失',
+      urgency: 'high',
+      metadata: { reportId }
+    });
+    
+    if (canProceed) {
+      console.log('保存报告:', reportId);
+    }
+  };
+
+  // 处理分享报告
+  const handleShareReport = async (reportId: string) => {
+    const canProceed = await requireAuth('share_content', {
+      message: '分享报告需要登录，安全地分享您的分析成果',
+      urgency: 'medium',
+      allowSkip: true,
+      metadata: { reportId, type: 'report' }
+    });
+    
+    if (canProceed) {
+      console.log('分享报告:', reportId);
+    }
+  };
+
+  // 处理下载报告
+  const handleDownloadReport = async (reportId: string) => {
+    const canProceed = await requireAuth('export_data', {
+      message: '下载报告需要登录，确保数据安全',
+      urgency: 'high',
+      metadata: { reportId, type: 'download' }
+    });
+    
+    if (canProceed) {
+      console.log('下载报告:', reportId);
+    }
+  };
+
+  // 处理查看历史
+  const handleViewHistory = async () => {
+    const canProceed = await requireAuth('view_history', {
+      message: '查看报告历史需要登录，管理您的所有报告',
+      urgency: 'medium',
+      metadata: { type: 'report_history' }
+    });
+    
+    if (canProceed) {
+      console.log('查看报告历史');
+    }
+  };
 
   const fetchReports = async () => {
     setLoading(true);
@@ -171,13 +243,29 @@ export default function ReportsPage() {
         {/* Header */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Reports</h1>
+            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              Reports
+              {shouldShowTrialIndicator() && (
+                <FeatureAccessIndicator featureId="generate_report" size="sm" />
+              )}
+            </h1>
             <p className="text-gray-600">Generate and manage analytics reports</p>
           </div>
-          <Button onClick={fetchReports} disabled={loading}>
-            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-            {t('common.refresh')}
-          </Button>
+          <div className="flex gap-2">
+            <LoginRequiredButton
+              featureId="view_history"
+              variant="outline"
+              onClick={handleViewHistory}
+              data-feature="view-report-history"
+            >
+              <Eye className="h-4 w-4 mr-2" />
+              View History
+            </LoginRequiredButton>
+            <Button onClick={fetchReports} disabled={loading}>
+              <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+              {t('common.refresh')}
+            </Button>
+          </div>
         </div>
 
         {/* Create Report */}
@@ -240,10 +328,12 @@ export default function ReportsPage() {
               ))}
             </div>
 
-            <Button 
-              onClick={createReport} 
+            <LoginRequiredButton
+              featureId="generate_report"
+              onClick={handleCreateReport}
               disabled={creating || !newReportTitle.trim()}
               className="w-full md:w-auto"
+              data-feature="create-report"
             >
               {creating ? (
                 <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
@@ -251,7 +341,7 @@ export default function ReportsPage() {
                 <Plus className="h-4 w-4 mr-2" />
               )}
               {creating ? 'Creating Report...' : 'Create Report'}
-            </Button>
+            </LoginRequiredButton>
           </CardContent>
         </Card>
 
@@ -317,13 +407,41 @@ export default function ReportsPage() {
                       <Eye className="h-4 w-4 mr-2" />
                       View
                     </Button>
-                    <Button size="sm" variant="outline" className="flex-1">
+                    <LoginRequiredButton
+                      featureId="export_data"
+                      size="sm"
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => handleDownloadReport(report.id)}
+                      data-feature="download-report"
+                    >
                       <Download className="h-4 w-4 mr-2" />
                       Download
-                    </Button>
-                    <Button size="sm" variant="outline">
+                    </LoginRequiredButton>
+                    <LoginRequiredButton
+                      featureId="share_content"
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleShareReport(report.id)}
+                      data-feature="share-report"
+                    >
                       <Share className="h-4 w-4" />
-                    </Button>
+                    </LoginRequiredButton>
+                  </div>
+                  
+                  {/* Save Action */}
+                  <div className="mt-2">
+                    <LoginRequiredButton
+                      featureId="save_report"
+                      size="sm"
+                      variant="ghost"
+                      className="w-full text-xs"
+                      onClick={() => handleSaveReport(report.id)}
+                      data-feature="save-report"
+                    >
+                      <Save className="h-3 w-3 mr-1" />
+                      Save to Account
+                    </LoginRequiredButton>
                   </div>
 
                   {/* Public indicator */}

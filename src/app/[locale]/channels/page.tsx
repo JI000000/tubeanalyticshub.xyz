@@ -3,11 +3,13 @@
 import { useState, useEffect } from 'react';
 import { AppShell } from '@/components/layout/app-shell';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useSmartAuth } from '@/hooks/useSmartAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Search, Users, Video, Eye, TrendingUp, Calendar, RefreshCw, ExternalLink, BarChart3, Plus, AlertCircle, CheckCircle } from 'lucide-react';
+import { LoginRequiredButton, FeatureAccessIndicator } from '@/components/auth/LoginRequiredWrapper';
+import { Search, Users, Video, Eye, TrendingUp, Calendar, RefreshCw, ExternalLink, BarChart3, Plus, AlertCircle, CheckCircle, Bookmark } from 'lucide-react';
 
 interface ChannelData {
   id: string;
@@ -120,12 +122,68 @@ function AddChannelForm({ onChannelAdded, userId }: AddChannelFormProps) {
 
 export default function ChannelsPage() {
   const { t } = useTranslation();
+  const { requireAuth, shouldShowTrialIndicator } = useSmartAuth();
   const [channels, setChannels] = useState<ChannelData[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'subscriber_count' | 'video_count' | 'view_count'>('subscriber_count');
 
   const userId = '00000000-0000-0000-0000-000000000001';
+
+  // 处理频道分析
+  const handleChannelAnalysis = async (channelId: string) => {
+    const canProceed = await requireAuth('channel_analysis', {
+      allowTrial: true,
+      trialAction: 'channel_analysis',
+      message: '分析频道需要登录或使用试用次数',
+      urgency: 'medium',
+      metadata: { channelId }
+    });
+    
+    if (canProceed) {
+      console.log('开始分析频道:', channelId);
+    }
+  };
+
+  // 处理保存分析结果
+  const handleSaveAnalysis = async (channelId: string) => {
+    const canProceed = await requireAuth('save_report', {
+      message: '保存频道分析结果需要登录',
+      urgency: 'high',
+      metadata: { channelId, type: 'channel_analysis' }
+    });
+    
+    if (canProceed) {
+      console.log('保存频道分析:', channelId);
+    }
+  };
+
+  // 处理收藏频道
+  const handleBookmarkChannel = async (channelId: string) => {
+    const canProceed = await requireAuth('bookmark_content', {
+      message: '收藏频道需要登录，建立您的专属频道库',
+      urgency: 'medium',
+      allowSkip: true,
+      metadata: { channelId, type: 'channel' }
+    });
+    
+    if (canProceed) {
+      console.log('收藏频道:', channelId);
+    }
+  };
+
+  // 处理竞争对手分析
+  const handleCompetitorAnalysis = async (channelId: string) => {
+    const canProceed = await requireAuth('competitor_analysis', {
+      message: '竞争对手分析需要登录，获得专业的市场洞察',
+      urgency: 'medium',
+      metadata: { channelId, type: 'competitor' }
+    });
+    
+    if (canProceed) {
+      console.log('竞争对手分析:', channelId);
+    }
+  };
 
   const fetchChannels = async () => {
     setLoading(true);
@@ -213,7 +271,12 @@ export default function ChannelsPage() {
         {/* Header */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{t('channels.title')}</h1>
+            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              {t('channels.title')}
+              {shouldShowTrialIndicator() && (
+                <FeatureAccessIndicator featureId="channel_analysis" size="sm" />
+              )}
+            </h1>
             <p className="text-gray-600">{t('channels.description')}</p>
           </div>
           <Button onClick={fetchChannels} disabled={loading}>
@@ -405,14 +468,54 @@ export default function ChannelsPage() {
 
                   {/* Actions */}
                   <div className="flex gap-2 pt-2 border-t">
-                    <Button size="sm" variant="outline" className="flex-1">
+                    <LoginRequiredButton
+                      featureId="channel_analysis"
+                      size="sm"
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => handleChannelAnalysis(channel.id)}
+                      data-feature="analyze-channel"
+                    >
                       <BarChart3 className="h-4 w-4 mr-2" />
                       {t('channels.analytics')}
-                    </Button>
-                    <Button size="sm" variant="outline" className="flex-1">
+                    </LoginRequiredButton>
+                    <LoginRequiredButton
+                      featureId="competitor_analysis"
+                      size="sm"
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => handleCompetitorAnalysis(channel.id)}
+                      data-feature="competitor-analysis"
+                    >
                       <TrendingUp className="h-4 w-4 mr-2" />
-                      {t('channels.trends')}
-                    </Button>
+                      Competitor
+                    </LoginRequiredButton>
+                  </div>
+                  
+                  {/* Additional Actions */}
+                  <div className="flex gap-2 mt-2">
+                    <LoginRequiredButton
+                      featureId="save_report"
+                      size="sm"
+                      variant="ghost"
+                      className="flex-1 text-xs"
+                      onClick={() => handleSaveAnalysis(channel.id)}
+                      data-feature="save-channel-analysis"
+                    >
+                      <BarChart3 className="h-3 w-3 mr-1" />
+                      Save Analysis
+                    </LoginRequiredButton>
+                    <LoginRequiredButton
+                      featureId="bookmark_content"
+                      size="sm"
+                      variant="ghost"
+                      className="flex-1 text-xs"
+                      onClick={() => handleBookmarkChannel(channel.id)}
+                      data-feature="bookmark-channel"
+                    >
+                      <Bookmark className="h-3 w-3 mr-1" />
+                      Bookmark
+                    </LoginRequiredButton>
                   </div>
                 </CardContent>
               </Card>

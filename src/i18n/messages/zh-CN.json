@@ -32,7 +32,10 @@
     "demoNote": "演示模式：任何密码都可以使用",
     "signInButton": "登录",
     "signingIn": "登录中...",
-    "newUserNote": "新用户？我们会自动为您创建账户。"
+    "newUserNote": "新用户？我们会自动为您创建账户。",
+    "signIn": "登录",
+    "guestMode": "访客模式",
+    "signInToSave": "登录以保存您的进度并访问所有功能"
   },
   "common": {
     "loading": "加载中...",

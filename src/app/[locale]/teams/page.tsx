@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation';
 import { AppShell } from '@/components/layout/app-shell';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useAuth } from '@/hooks/useAuth';
+import { useSmartAuth } from '@/hooks/useSmartAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { LoginRequiredButton, FeatureAccessIndicator } from '@/components/auth/LoginRequiredWrapper';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -39,6 +41,7 @@ export default function TeamsPage() {
   const router = useRouter();
   const { t } = useTranslation();
   const { getUserId, user, isAuthenticated, loading: authLoading } = useAuth();
+  const { requireAuth } = useSmartAuth();
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
@@ -46,6 +49,32 @@ export default function TeamsPage() {
   const [newTeamName, setNewTeamName] = useState('');
   const [newTeamDescription, setNewTeamDescription] = useState('');
   const [error, setError] = useState('');
+
+  // 处理团队协作访问
+  const handleTeamCollaboration = async () => {
+    const canProceed = await requireAuth('team_collaboration', {
+      message: '团队协作功能需要登录，管理您的团队',
+      urgency: 'medium',
+      metadata: { type: 'team_collaboration' }
+    });
+    
+    if (canProceed) {
+      await fetchTeams();
+    }
+  };
+
+  // 处理创建团队
+  const handleCreateTeam = async () => {
+    const canProceed = await requireAuth('team_collaboration', {
+      message: '创建团队需要登录，开始团队协作',
+      urgency: 'high',
+      metadata: { type: 'create_team' }
+    });
+    
+    if (canProceed) {
+      await createTeam();
+    }
+  };
 
   const fetchTeams = async () => {
     setLoading(true);
@@ -110,8 +139,12 @@ export default function TeamsPage() {
   };
 
   useEffect(() => {
-    if (!authLoading && isAuthenticated) {
-      fetchTeams();
+    if (!authLoading) {
+      if (isAuthenticated) {
+        fetchTeams();
+      } else {
+        handleTeamCollaboration();
+      }
     }
   }, [authLoading, isAuthenticated]);
 
@@ -182,7 +215,10 @@ export default function TeamsPage() {
         {/* Header */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Teams</h1>
+            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              Teams
+              <FeatureAccessIndicator featureId="team_collaboration" size="sm" />
+            </h1>
             <p className="text-gray-600">Manage your teams and collaboration</p>
           </div>
           <div className="flex gap-2">
@@ -191,10 +227,14 @@ export default function TeamsPage() {
               Refresh
             </Button>
             {canCreateTeam && (
-              <Button onClick={() => setShowCreateForm(true)}>
+              <LoginRequiredButton
+                featureId="team_collaboration"
+                onClick={() => setShowCreateForm(true)}
+                data-feature="create-team"
+              >
                 <Plus className="h-4 w-4 mr-2" />
                 Create Team
-              </Button>
+              </LoginRequiredButton>
             )}
           </div>
         </div>
@@ -252,9 +292,11 @@ export default function TeamsPage() {
                 />
               </div>
               <div className="flex gap-2">
-                <Button 
-                  onClick={createTeam} 
+                <LoginRequiredButton
+                  featureId="team_collaboration"
+                  onClick={handleCreateTeam}
                   disabled={creating || !newTeamName.trim()}
+                  data-feature="create-team"
                 >
                   {creating ? (
                     <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
@@ -262,7 +304,7 @@ export default function TeamsPage() {
                     <Plus className="h-4 w-4 mr-2" />
                   )}
                   {creating ? 'Creating...' : 'Create Team'}
-                </Button>
+                </LoginRequiredButton>
                 <Button 
                   variant="outline" 
                   onClick={() => {
@@ -379,10 +421,14 @@ export default function TeamsPage() {
                 }
               </p>
               {canCreateTeam && (
-                <Button onClick={() => setShowCreateForm(true)}>
+                <LoginRequiredButton
+                  featureId="team_collaboration"
+                  onClick={() => setShowCreateForm(true)}
+                  data-feature="create-first-team"
+                >
                   <Plus className="h-4 w-4 mr-2" />
                   Create Your First Team
-                </Button>
+                </LoginRequiredButton>
               )}
             </CardContent>
           </Card>

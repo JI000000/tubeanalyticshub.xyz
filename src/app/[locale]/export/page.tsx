@@ -3,11 +3,13 @@
 import { useState, useEffect } from 'react';
 // import { useTranslation } from '@/hooks/useTranslation';
 import { AppShell } from '@/components/layout/app-shell';
+import { useSmartAuth } from '@/hooks/useSmartAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Download, FileText, Table, BarChart3, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { LoginRequiredButton, FeatureAccessIndicator } from '@/components/auth/LoginRequiredWrapper';
+import { Download, FileText, Table, BarChart3, CheckCircle, Clock, AlertCircle, Eye } from 'lucide-react';
 
 interface ExportTask {
   id: string;
@@ -22,8 +24,35 @@ interface ExportTask {
 }
 
 export default function ExportPage() {
+  const { requireAuth } = useSmartAuth();
   const [exportTasks, setExportTasks] = useState<ExportTask[]>([]);
   const [loading, setLoading] = useState(false);
+
+  // 处理导出任务创建（需要登录检查）
+  const handleCreateExportTask = async (type: ExportTask['type'], dataType: ExportTask['dataType']) => {
+    const canProceed = await requireAuth('export_data', {
+      message: '数据导出需要登录，确保数据安全和归属权',
+      urgency: 'high',
+      metadata: { exportType: type, dataType }
+    });
+    
+    if (canProceed) {
+      await createExportTask(type, dataType);
+    }
+  };
+
+  // 处理查看导出历史
+  const handleViewHistory = async () => {
+    const canProceed = await requireAuth('view_history', {
+      message: '查看导出历史需要登录',
+      urgency: 'medium',
+      metadata: { type: 'export_history' }
+    });
+    
+    if (canProceed) {
+      console.log('查看导出历史');
+    }
+  };
 
   const createExportTask = async (type: ExportTask['type'], dataType: ExportTask['dataType']) => {
     setLoading(true);
@@ -162,9 +191,23 @@ export default function ExportPage() {
     <AppShell>
       <div className="space-y-6">
         {/* Header */}
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Data Export</h1>
-          <p className="text-gray-600">Export your YouTube analytics data in various formats</p>
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              Data Export
+              <FeatureAccessIndicator featureId="export_data" size="sm" />
+            </h1>
+            <p className="text-gray-600">Export your YouTube analytics data in various formats</p>
+          </div>
+          <LoginRequiredButton
+            featureId="view_history"
+            variant="outline"
+            onClick={handleViewHistory}
+            data-feature="export-history"
+          >
+            <Eye className="h-4 w-4 mr-2" />
+            View History
+          </LoginRequiredButton>
         </div>
 
         {/* Export Options */}
@@ -180,23 +223,27 @@ export default function ExportPage() {
                   <p className="text-sm text-gray-500">Compatible with Excel and spreadsheet apps</p>
                 </div>
                 <div className="space-y-2">
-                  <Button
+                  <LoginRequiredButton
+                    featureId="export_data"
                     size="sm"
                     className="w-full"
-                    onClick={() => createExportTask('csv', 'videos')}
+                    onClick={() => handleCreateExportTask('csv', 'videos')}
                     disabled={loading}
+                    data-feature="export-csv"
                   >
                     Export Videos
-                  </Button>
-                  <Button
+                  </LoginRequiredButton>
+                  <LoginRequiredButton
+                    featureId="export_data"
                     size="sm"
                     variant="outline"
                     className="w-full"
-                    onClick={() => createExportTask('csv', 'all')}
+                    onClick={() => handleCreateExportTask('csv', 'all')}
                     disabled={loading}
+                    data-feature="export-csv"
                   >
                     Export All
-                  </Button>
+                  </LoginRequiredButton>
                 </div>
               </div>
             </CardContent>
@@ -213,23 +260,27 @@ export default function ExportPage() {
                   <p className="text-sm text-gray-500">For developers and API integration</p>
                 </div>
                 <div className="space-y-2">
-                  <Button
+                  <LoginRequiredButton
+                    featureId="export_data"
                     size="sm"
                     className="w-full"
-                    onClick={() => createExportTask('json', 'videos')}
+                    onClick={() => handleCreateExportTask('json', 'videos')}
                     disabled={loading}
+                    data-feature="export-json"
                   >
                     Export Videos
-                  </Button>
-                  <Button
+                  </LoginRequiredButton>
+                  <LoginRequiredButton
+                    featureId="export_data"
                     size="sm"
                     variant="outline"
                     className="w-full"
-                    onClick={() => createExportTask('json', 'comments')}
+                    onClick={() => handleCreateExportTask('json', 'comments')}
                     disabled={loading}
+                    data-feature="export-json"
                   >
                     Export Comments
-                  </Button>
+                  </LoginRequiredButton>
                 </div>
               </div>
             </CardContent>
@@ -246,23 +297,27 @@ export default function ExportPage() {
                   <p className="text-sm text-gray-500">Advanced spreadsheet format</p>
                 </div>
                 <div className="space-y-2">
-                  <Button
+                  <LoginRequiredButton
+                    featureId="export_data"
                     size="sm"
                     className="w-full"
-                    onClick={() => createExportTask('excel', 'channels')}
+                    onClick={() => handleCreateExportTask('excel', 'channels')}
                     disabled={loading}
+                    data-feature="export-excel"
                   >
                     Export Channels
-                  </Button>
-                  <Button
+                  </LoginRequiredButton>
+                  <LoginRequiredButton
+                    featureId="export_data"
                     size="sm"
                     variant="outline"
                     className="w-full"
-                    onClick={() => createExportTask('excel', 'all')}
+                    onClick={() => handleCreateExportTask('excel', 'all')}
                     disabled={loading}
+                    data-feature="export-excel"
                   >
                     Export All
-                  </Button>
+                  </LoginRequiredButton>
                 </div>
               </div>
             </CardContent>
@@ -279,23 +334,27 @@ export default function ExportPage() {
                   <p className="text-sm text-gray-500">Professional formatted reports</p>
                 </div>
                 <div className="space-y-2">
-                  <Button
+                  <LoginRequiredButton
+                    featureId="export_data"
                     size="sm"
                     className="w-full"
-                    onClick={() => createExportTask('pdf', 'videos')}
+                    onClick={() => handleCreateExportTask('pdf', 'videos')}
                     disabled={loading}
+                    data-feature="export-pdf"
                   >
                     Video Report
-                  </Button>
-                  <Button
+                  </LoginRequiredButton>
+                  <LoginRequiredButton
+                    featureId="export_data"
                     size="sm"
                     variant="outline"
                     className="w-full"
-                    onClick={() => createExportTask('pdf', 'all')}
+                    onClick={() => handleCreateExportTask('pdf', 'all')}
                     disabled={loading}
+                    data-feature="export-pdf"
                   >
                     Full Report
-                  </Button>
+                  </LoginRequiredButton>
                 </div>
               </div>
             </CardContent>

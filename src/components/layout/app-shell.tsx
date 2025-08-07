@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { useAuth } from '@/hooks/useAuth';
+import Link from 'next/link';
+import { useSmartAuth } from '@/hooks/useSmartAuth';
 import { useTranslation } from '@/hooks/useTranslation';
-import { LoginForm } from '@/components/auth/login-form';
+import { SmartLoginModal } from '@/components/auth/SmartLoginModal';
+import { TrialStatusIndicator } from '@/components/auth/TrialStatusIndicator';
 import { LanguageSwitcher } from '@/components/ui/language-switcher';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -17,19 +19,24 @@ interface AppShellProps {
 export function AppShell({ children }: AppShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
-  const { user, isAuthenticated, loading, logout } = useAuth();
+  const smartAuth = useSmartAuth();
+  const {
+    user,
+    isAuthenticated,
+    loading,
+    trialRemaining,
+    shouldShowTrialIndicator,
+    showLoginModal,
+    loginTrigger,
+    loginContext,
+    handleLoginSuccess,
+    handleLoginCancel,
+    handleLoginSkip,
+    closeLoginModal
+  } = smartAuth;
   const { t } = useTranslation();
-  
-  const currentLocale = pathname.split('/')[1] || 'en-US';
 
-  // 如果用户未认证，显示登录界面
-  if (!loading && !isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <LoginForm onSuccess={() => window.location.reload()} />
-      </div>
-    );
-  }
+  const currentLocale = pathname.split('/')[1] || 'en-US';
 
   // 如果正在加载，显示加载界面
   if (loading) {
@@ -42,9 +49,9 @@ export function AppShell({ children }: AppShellProps) {
       </div>
     );
   }
-  
+
   const navigation = [
-    { name: t('navigation.dashboard'), href: `/${currentLocale}`, icon: Home },
+    { name: t('navigation.dashboard'), href: `/${currentLocale}/dashboard`, icon: Home },
     { name: t('navigation.videos'), href: `/${currentLocale}/videos`, icon: Video },
     { name: t('navigation.channels'), href: `/${currentLocale}/channels`, icon: Users },
     { name: t('navigation.comments'), href: `/${currentLocale}/comments`, icon: MessageSquare },
@@ -63,8 +70,8 @@ export function AppShell({ children }: AppShellProps) {
     <div className="flex min-h-screen bg-gray-50">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
-        <div 
-          className="fixed inset-0 z-40 lg:hidden" 
+        <div
+          className="fixed inset-0 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         >
           <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
@@ -102,26 +109,69 @@ export function AppShell({ children }: AppShellProps) {
 
           {/* User info */}
           <div className="px-6 py-5 border-b border-gray-200">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <User className="h-5 w-5 text-blue-600" />
+            {isAuthenticated && user ? (
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  {user.image ? (
+                    <img
+                      src={user.image}
+                      alt={user.name || user.email}
+                      className="h-10 w-10 rounded-full"
+                    />
+                  ) : (
+                    <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                      <User className="h-5 w-5 text-blue-600" />
+                    </div>
+                  )}
+                </div>
+                <div className="ml-3 min-w-0 flex-1">
+                  <p className="text-sm font-medium text-gray-900 truncate">
+                    {user.name || user.email || 'User'}
+                  </p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Badge variant="secondary" className="text-xs capitalize">
+                      {user.plan || 'Free'}
+                    </Badge>
+                    <span className="text-xs text-gray-500">
+                      {user.quota_used || 0}/{user.quota_limit || 50} quota
+                    </span>
+                  </div>
                 </div>
               </div>
-              <div className="ml-3 min-w-0 flex-1">
-                <p className="text-sm font-medium text-gray-900 truncate">
-                  {user?.email || 'User'}
-                </p>
-                <div className="flex items-center gap-2 mt-1">
-                  <Badge variant="secondary" className="text-xs capitalize">
-                    {user?.plan || 'Free'}
-                  </Badge>
-                  <span className="text-xs text-gray-500">
-                    {user?.quota_used || 0}/{user?.quota_limit || 50} quota
-                  </span>
+            ) : (
+              <div className="space-y-3">
+                {shouldShowTrialIndicator() && (
+                  <TrialStatusIndicator
+                    variant="compact"
+                    showLoginButton={true}
+                    onLoginClick={() => smartAuth.triggerLogin({
+                      type: 'feature_required',
+                      message: t('auth.signInToSave') || 'Sign in to save your progress and access all features',
+                      urgency: 'low',
+                      allowSkip: true,
+                    })}
+                    className="text-xs"
+                  />
+                )}
+                <div className="text-center">
+                  <p className="text-sm text-gray-600 mb-2">
+                    {t('auth.guestMode') || 'Guest Mode'}
+                  </p>
+                  <Button
+                    size="sm"
+                    className="w-full"
+                    onClick={() => smartAuth.triggerLogin({
+                      type: 'feature_required',
+                      message: t('auth.signInToSave') || 'Sign in to save your progress and access all features',
+                      urgency: 'low',
+                      allowSkip: true,
+                    })}
+                  >
+                    {t('auth.signIn') || 'Sign In'}
+                  </Button>
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Navigation */}
@@ -129,26 +179,26 @@ export function AppShell({ children }: AppShellProps) {
             {navigation.map((item) => {
               const isActive = pathname === item.href;
               return (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className={`
                     group flex items-center px-3 py-3 text-sm font-medium rounded-md transition-colors
-                    ${isActive 
-                      ? 'bg-blue-100 text-blue-700' 
+                    ${isActive
+                      ? 'bg-blue-100 text-blue-700'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                     }
                   `}
                 >
                   <item.icon className={`
                     mr-3 h-5 w-5 flex-shrink-0
-                    ${isActive 
-                      ? 'text-blue-500' 
+                    ${isActive
+                      ? 'text-blue-500'
                       : 'text-gray-400 group-hover:text-gray-500'
                     }
                   `} />
                   {item.name}
-                </a>
+                </Link>
               );
             })}
           </nav>
@@ -175,24 +225,26 @@ export function AppShell({ children }: AppShellProps) {
           {/* Secondary navigation */}
           <div className="px-4 py-5 border-t border-gray-200 space-y-1">
             {secondaryNavigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
                 className="group flex items-center px-3 py-3 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900"
               >
                 <item.icon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" />
                 {item.name}
-              </a>
+              </Link>
             ))}
-            
-            {/* Logout button */}
-            <button
-              onClick={logout}
-              className="w-full group flex items-center px-3 py-3 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900"
-            >
-              <LogOut className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" />
-              {t('navigation.signOut')}
-            </button>
+
+            {/* Logout button - only show if authenticated */}
+            {isAuthenticated && (
+              <button
+                onClick={() => smartAuth.user && window.confirm(t('auth.confirmSignOut') || 'Are you sure you want to sign out?') && smartAuth.user.logout?.()}
+                className="w-full group flex items-center px-3 py-3 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 hover:text-gray-900"
+              >
+                <LogOut className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" />
+                {t('navigation.signOut')}
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -210,26 +262,56 @@ export function AppShell({ children }: AppShellProps) {
             >
               <Menu className="h-5 w-5" />
             </Button>
-            
+
             <div className="flex-1 flex justify-center lg:justify-start">
               <h2 className="text-lg font-semibold text-gray-900">
                 {t('app.dataConsole')}
               </h2>
             </div>
-            
+
             <div className="flex items-center gap-4">
-              <div className="hidden sm:flex items-center text-sm text-gray-500">
-                <span>{t('app.quota')}: </span>
-                <Badge variant="outline" className="ml-1">
-                  {user?.quota_used || 0}/{user?.quota_limit || 50}
-                </Badge>
-              </div>
-              
-              <LanguageSwitcher />
-              
-              <Button variant="ghost" size="icon" onClick={logout}>
-                <LogOut className="h-5 w-5" />
-              </Button>
+              {isAuthenticated && user ? (
+                <>
+                  <div className="hidden sm:flex items-center text-sm text-gray-500">
+                    <span>{t('app.quota')}: </span>
+                    <Badge variant="outline" className="ml-1">
+                      {user.quota_used || 0}/{user.quota_limit || 50}
+                    </Badge>
+                  </div>
+
+                  <LanguageSwitcher />
+
+                  <Button variant="ghost" size="icon" onClick={() => smartAuth.user?.logout?.()}>
+                    <LogOut className="h-5 w-5" />
+                  </Button>
+                </>
+              ) : (
+                <>
+                  {shouldShowTrialIndicator() && (
+                    <div className="hidden sm:flex items-center text-sm text-gray-500">
+                      <span>{t('app.trialRemaining')}: </span>
+                      <Badge variant="outline" className="ml-1">
+                        {trialRemaining}
+                      </Badge>
+                    </div>
+                  )}
+
+                  <LanguageSwitcher />
+
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => smartAuth.triggerLogin({
+                      type: 'feature_required',
+                      message: t('auth.signInToAccess') || 'Sign in to access all features',
+                      urgency: 'low',
+                      allowSkip: true,
+                    })}
+                  >
+                    {t('auth.signIn') || 'Sign In'}
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -241,6 +323,19 @@ export function AppShell({ children }: AppShellProps) {
           </div>
         </main>
       </div>
+
+      {/* Smart Login Modal */}
+      {showLoginModal && loginTrigger && (
+        <SmartLoginModal
+          open={showLoginModal}
+          onOpenChange={(open) => !open && closeLoginModal()}
+          trigger={loginTrigger}
+          context={loginContext}
+          onSuccess={handleLoginSuccess}
+          onCancel={handleLoginCancel}
+          onSkip={handleLoginSkip}
+        />
+      )}
     </div>
   );
 }

@@ -1,8 +1,20 @@
+/* 功能访问权限视觉指示器样式 */
+@import '../styles/feature-access-indicators.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  }
+  
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -65,5 +77,418 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+/*
+ Mobile Authentication Optimizations */
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari */
+  .mobile-auth-modal {
+    /* Prevent zoom on input focus */
+    -webkit-text-size-adjust: 100%;
+    /* Prevent callout on touch and hold */
+    -webkit-touch-callout: none;
+    /* Prevent selection highlighting */
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  .mobile-auth-button {
+    /* Remove iOS button styling */
+    -webkit-appearance: none;
+    appearance: none;
+    /* Prevent tap highlight */
+    -webkit-tap-highlight-color: transparent;
+    /* Ensure proper touch target size */
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Fix for iOS Safari viewport units */
+  .mobile-auth-sheet {
+    height: 85vh;
+    height: calc(var(--vh, 1vh) * 85);
+  }
+}
+
+/* Android Chrome specific optimizations */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+  /* Android Chrome */
+  .mobile-auth-button {
+    /* Remove tap highlight */
+    -webkit-tap-highlight-color: transparent;
+    /* Ensure proper touch feedback */
+    touch-action: manipulation;
+  }
+  
+  /* Fix for Android Chrome address bar */
+  .mobile-auth-sheet {
+    height: 85vh;
+    height: calc(100vh - 100px); /* Account for address bar */
+  }
+}
+
+/* General mobile optimizations */
+@media (max-width: 768px) {
+  .mobile-auth-modal {
+    /* Prevent body scroll when modal is open */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .mobile-auth-button {
+    /* Ensure minimum touch target size */
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 16px; /* Prevent zoom on iOS */
+    
+    /* Smooth touch feedback */
+    transition: transform 0.1s ease-out, background-color 0.2s ease-out;
+  }
+  
+  .mobile-auth-button:active {
+    transform: scale(0.98);
+  }
+  
+  /* Optimize for thumb navigation */
+  .mobile-auth-content {
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+  }
+  
+  /* Handle notch/safe areas */
+  .mobile-auth-header {
+    padding-top: env(safe-area-inset-top, 20px);
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .mobile-auth-button {
+    /* Larger touch targets for coarse pointers */
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* Increase spacing for easier touch navigation */
+  .mobile-auth-button + .mobile-auth-button {
+    margin-top: 12px;
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .mobile-auth-icon {
+    /* Ensure crisp icons on retina displays */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .mobile-auth-sheet {
+    height: 90vh;
+    max-height: 500px;
+  }
+  
+  .mobile-auth-content {
+    padding: 16px;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-auth-button {
+    transition: none;
+  }
+  
+  .mobile-auth-button:active {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .mobile-auth-button {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Focus management for keyboard navigation */
+.mobile-auth-button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Prevent text selection on buttons */
+.mobile-auth-button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Smooth scrolling for modal content */
+.mobile-auth-scroll {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Handle keyboard appearance on mobile */
+@media (max-width: 768px) {
+  .mobile-auth-modal.keyboard-visible {
+    height: 50vh;
+  }
+}
+
+/* Enhanced Modal Display Modes */
+
+/* Desktop Modal Styling */
+@media (min-width: 1025px) {
+  .modal-content {
+    /* Smooth transitions for desktop interactions */
+    transition: all 0.2s ease-out;
+  }
+  
+  /* Enhanced focus states for desktop */
+  .modal-content button:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  
+  /* Hover effects for desktop */
+  .modal-content button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Tablet Modal Styling */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .modal-content {
+    /* Optimized for tablet touch interactions */
+    padding: 24px;
+  }
+  
+  /* Larger touch targets for tablet */
+  .modal-content button {
+    min-height: 48px;
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+  
+  /* Enhanced spacing for tablet readability */
+  .modal-content .space-y-1 > * + * {
+    margin-top: 8px;
+  }
+  
+  .modal-content .space-y-2 > * + * {
+    margin-top: 12px;
+  }
+}
+
+/* Urgency-based Animation Enhancements */
+
+/* High urgency animations */
+.urgency-high {
+  animation: urgentPulse 2s ease-in-out infinite;
+}
+
+@keyframes urgentPulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Medium urgency animations */
+.urgency-medium {
+  animation: mediumGlow 3s ease-in-out infinite;
+}
+
+@keyframes mediumGlow {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 0 8px rgba(249, 115, 22, 0);
+  }
+}
+
+/* Low urgency subtle animations */
+.urgency-low {
+  animation: subtleFloat 4s ease-in-out infinite;
+}
+
+@keyframes subtleFloat {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-2px);
+  }
+}
+
+/* Enhanced Mobile Drawer Animations */
+@media (max-width: 768px) {
+  /* Smooth drawer slide-in */
+  .mobile-auth-sheet[data-state="open"] {
+    animation: slideInFromBottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .mobile-auth-sheet[data-state="closed"] {
+    animation: slideOutToBottom 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOutToBottom {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+  
+  /* Pull indicator animations */
+  .mobile-auth-header .w-12 {
+    transition: all 0.2s ease-out;
+  }
+  
+  .mobile-auth-header:hover .w-12 {
+    width: 3.5rem;
+    opacity: 0.8;
+  }
+}
+
+/* Enhanced Desktop Dialog Animations */
+@media (min-width: 769px) {
+  /* Smooth zoom and fade for desktop */
+  .modal-dialog[data-state="open"] {
+    animation: zoomInFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .modal-dialog[data-state="closed"] {
+    animation: zoomOutFade 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  @keyframes zoomInFade {
+    from {
+      transform: translate(-50%, -50%) scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes zoomOutFade {
+    from {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: translate(-50%, -50%) scale(0.9);
+      opacity: 0;
+    }
+  }
+}
+
+/* Responsive Typography Scaling */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Tablet typography adjustments */
+  .modal-content h2 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+  
+  .modal-content h3 {
+    font-size: 1.125rem;
+    line-height: 1.625rem;
+  }
+  
+  .modal-content p, .modal-content li {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+/* Enhanced Accessibility Features */
+
+/* High contrast mode enhancements */
+@media (prefers-contrast: high) {
+  .modal-content {
+    border: 3px solid currentColor;
+  }
+  
+  .modal-content button {
+    border: 2px solid currentColor;
+    background: transparent;
+  }
+  
+  .modal-content button:hover,
+  .modal-content button:focus {
+    background: currentColor;
+    color: white;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .modal-content,
+  .mobile-auth-sheet,
+  .modal-dialog {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .urgency-high,
+  .urgency-medium,
+  .urgency-low {
+    animation: none !important;
+  }
+}
+
+/* Dark mode support for modal */
+@media (prefers-color-scheme: dark) {
+  .modal-content {
+    background: #1f2937;
+    border-color: #374151;
+    color: #f9fafb;
+  }
+  
+  .mobile-auth-sheet {
+    background: #1f2937;
+    border-color: #374151;
+  }
+}
+
+/* Print styles (hide modals when printing) */
+@media print {
+  .modal-content,
+  .mobile-auth-sheet,
+  [data-radix-dialog-overlay],
+  [data-radix-dialog-content] {
+    display: none !important;
   }
 }

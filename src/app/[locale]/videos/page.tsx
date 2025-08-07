@@ -3,10 +3,12 @@
 import { useState, useEffect } from 'react';
 import { AppShell } from '@/components/layout/app-shell';
 import { useTranslation } from '@/hooks/useTranslation';
+import { useSmartAuth } from '@/hooks/useSmartAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { LoginRequiredButton, FeatureAccessIndicator } from '@/components/auth/LoginRequiredWrapper';
 import { 
   Search, 
   Video, 
@@ -18,7 +20,9 @@ import {
   ExternalLink,
   Play,
   Clock,
-  TrendingUp
+  TrendingUp,
+  Bookmark,
+  Download
 } from 'lucide-react';
 
 interface VideoData {
@@ -41,12 +45,73 @@ interface VideoData {
 
 export default function VideosPage() {
   const { t } = useTranslation();
+  const { requireAuth, shouldShowTrialIndicator } = useSmartAuth();
   const [videos, setVideos] = useState<VideoData[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'published_at' | 'view_count' | 'like_count'>('published_at');
 
   const userId = '00000000-0000-0000-0000-000000000001';
+
+  // 处理视频分析
+  const handleVideoAnalysis = async (videoId: string) => {
+    const canProceed = await requireAuth('video_analysis', {
+      allowTrial: true,
+      trialAction: 'video_analysis',
+      message: '分析视频需要登录或使用试用次数',
+      urgency: 'medium',
+      metadata: { videoId }
+    });
+    
+    if (canProceed) {
+      // 执行视频分析逻辑
+      console.log('开始分析视频:', videoId);
+      // 这里可以添加实际的分析逻辑
+    }
+  };
+
+  // 处理保存分析结果
+  const handleSaveAnalysis = async (videoId: string) => {
+    const canProceed = await requireAuth('save_report', {
+      message: '保存分析结果需要登录，避免丢失宝贵的分析数据',
+      urgency: 'high',
+      metadata: { videoId, type: 'video_analysis' }
+    });
+    
+    if (canProceed) {
+      // 执行保存逻辑
+      console.log('保存视频分析:', videoId);
+    }
+  };
+
+  // 处理收藏视频
+  const handleBookmarkVideo = async (videoId: string) => {
+    const canProceed = await requireAuth('bookmark_content', {
+      message: '收藏功能需要登录，建立您的专属视频库',
+      urgency: 'medium',
+      allowSkip: true,
+      metadata: { videoId, type: 'video' }
+    });
+    
+    if (canProceed) {
+      // 执行收藏逻辑
+      console.log('收藏视频:', videoId);
+    }
+  };
+
+  // 处理导出数据
+  const handleExportData = async () => {
+    const canProceed = await requireAuth('export_data', {
+      message: '导出视频数据需要登录，确保数据安全',
+      urgency: 'high',
+      metadata: { type: 'video_data' }
+    });
+    
+    if (canProceed) {
+      // 执行导出逻辑
+      console.log('导出视频数据');
+    }
+  };
 
   const fetchVideos = async () => {
     setLoading(true);
@@ -146,13 +211,29 @@ export default function VideosPage() {
         {/* Header */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Videos</h1>
+            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              Videos
+              {shouldShowTrialIndicator() && (
+                <FeatureAccessIndicator featureId="video_analysis" size="sm" />
+              )}
+            </h1>
             <p className="text-gray-600">Analyze your YouTube videos</p>
           </div>
-          <Button onClick={fetchVideos} disabled={loading}>
-            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-            {t('common.refresh')}
-          </Button>
+          <div className="flex gap-2">
+            <LoginRequiredButton
+              featureId="export_data"
+              variant="outline"
+              onClick={handleExportData}
+              data-feature="export-video-data"
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Export Data
+            </LoginRequiredButton>
+            <Button onClick={fetchVideos} disabled={loading}>
+              <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+              {t('common.refresh')}
+            </Button>
+          </div>
         </div>
 
         {/* Stats Cards */}
@@ -336,14 +417,52 @@ export default function VideosPage() {
 
                   {/* Actions */}
                   <div className="flex gap-2 pt-2 border-t">
-                    <Button size="sm" variant="outline" className="flex-1">
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="flex-1"
+                      onClick={() => window.open(`https://youtube.com/watch?v=${video.id}`, '_blank')}
+                    >
                       <Play className="h-4 w-4 mr-2" />
                       Watch
                     </Button>
-                    <Button size="sm" variant="outline" className="flex-1">
+                    <LoginRequiredButton
+                      featureId="video_analysis"
+                      size="sm"
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => handleVideoAnalysis(video.id)}
+                      data-feature="analyze-video"
+                    >
                       <TrendingUp className="h-4 w-4 mr-2" />
                       Analyze
-                    </Button>
+                    </LoginRequiredButton>
+                  </div>
+                  
+                  {/* Additional Actions */}
+                  <div className="flex gap-2 mt-2">
+                    <LoginRequiredButton
+                      featureId="save_report"
+                      size="sm"
+                      variant="ghost"
+                      className="flex-1 text-xs"
+                      onClick={() => handleSaveAnalysis(video.id)}
+                      data-feature="save-video-analysis"
+                    >
+                      <Download className="h-3 w-3 mr-1" />
+                      Save Analysis
+                    </LoginRequiredButton>
+                    <LoginRequiredButton
+                      featureId="bookmark_content"
+                      size="sm"
+                      variant="ghost"
+                      className="flex-1 text-xs"
+                      onClick={() => handleBookmarkVideo(video.id)}
+                      data-feature="bookmark-video"
+                    >
+                      <Bookmark className="h-3 w-3 mr-1" />
+                      Bookmark
+                    </LoginRequiredButton>
                   </div>
                 </CardContent>
               </Card>

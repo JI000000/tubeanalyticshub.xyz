@@ -1,0 +1,231 @@
+/**
+ * 功能访问权限视觉指示器的自定义样式
+ * 提供额外的视觉效果和动画
+ */
+
+/* 锁定图标动画 */
+.feature-lock-icon {
+  transition: all 0.2s ease-in-out;
+}
+
+.feature-lock-icon:hover {
+  transform: scale(1.1);
+}
+
+/* 功能禁用状态的视觉效果 */
+.feature-disabled {
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-disabled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 0, 0, 0.05) 10px,
+    rgba(0, 0, 0, 0.05) 20px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 登录要求标签的脉冲动画 */
+.login-required-badge {
+  animation: pulse-subtle 2s infinite;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* 功能访问指示器的渐变背景 */
+.access-level-trial {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-color: #f59e0b;
+}
+
+.access-level-authenticated {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-color: #3b82f6;
+}
+
+.access-level-premium {
+  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+  border-color: #8b5cf6;
+}
+
+/* 工具提示的自定义样式 */
+.feature-tooltip {
+  max-width: 300px;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.feature-tooltip-arrow {
+  fill: rgba(0, 0, 0, 0.9);
+}
+
+/* 功能按钮的悬停效果 */
+.feature-button {
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.feature-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.feature-button.locked {
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border-color: #d1d5db;
+  color: #6b7280;
+}
+
+.feature-button.locked:hover {
+  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  border-color: #9ca3af;
+}
+
+/* 功能卡片的禁用状态 */
+.feature-card-disabled {
+  position: relative;
+  opacity: 0.7;
+}
+
+.feature-card-disabled::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(2px);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* 访问级别指示器的颜色变量 */
+:root {
+  --access-trial-color: #f59e0b;
+  --access-trial-bg: #fef3c7;
+  --access-trial-border: #fde68a;
+  
+  --access-authenticated-color: #3b82f6;
+  --access-authenticated-bg: #dbeafe;
+  --access-authenticated-border: #bfdbfe;
+  
+  --access-premium-color: #8b5cf6;
+  --access-premium-bg: #f3e8ff;
+  --access-premium-border: #e9d5ff;
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --access-trial-bg: rgba(245, 158, 11, 0.1);
+    --access-trial-border: rgba(245, 158, 11, 0.2);
+    
+    --access-authenticated-bg: rgba(59, 130, 246, 0.1);
+    --access-authenticated-border: rgba(59, 130, 246, 0.2);
+    
+    --access-premium-bg: rgba(139, 92, 246, 0.1);
+    --access-premium-border: rgba(139, 92, 246, 0.2);
+  }
+  
+  .feature-tooltip {
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .feature-button.locked {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border-color: #374151;
+    color: #9ca3af;
+  }
+  
+  .feature-button.locked:hover {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    border-color: #4b5563;
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .feature-tooltip {
+    max-width: 250px;
+    font-size: 13px;
+    padding: 10px;
+  }
+  
+  .feature-button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  
+  .login-required-badge {
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+}
+
+/* 可访问性增强 */
+@media (prefers-reduced-motion: reduce) {
+  .feature-lock-icon,
+  .feature-button,
+  .login-required-badge {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .feature-button.locked {
+    border-width: 2px;
+    border-style: dashed;
+  }
+  
+  .access-level-trial,
+  .access-level-authenticated,
+  .access-level-premium {
+    border-width: 2px;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .feature-tooltip,
+  .feature-card-disabled::after {
+    display: none;
+  }
+  
+  .feature-button.locked {
+    background: white;
+    border: 2px dashed #666;
+  }
+  
+  .login-required-badge {
+    background: white;
+    color: black;
+    border: 1px solid black;
+  }
+}

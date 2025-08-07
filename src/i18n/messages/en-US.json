@@ -32,7 +32,10 @@
     "demoNote": "Demo mode: any password will work",
     "signInButton": "Sign In",
     "signingIn": "Signing in...",
-    "newUserNote": "New user? We'll create an account for you automatically."
+    "newUserNote": "New user? We'll create an account for you automatically.",
+    "signIn": "Sign In",
+    "guestMode": "Guest Mode",
+    "signInToSave": "Sign in to save your progress and access all features"
   },
   "common": {
     "loading": "Loading...",

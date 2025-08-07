@@ -1,23 +1,67 @@
 import { createClient } from '@supabase/supabase-js';
 import { createBrowserClient, createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+// 环境变量检查和获取
+const getSupabaseUrl = () => {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (!url) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL environment variable');
+  }
+  return url;
+};
+
+const getSupabaseAnonKey = () => {
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!key) {
+    throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable');
+  }
+  return key;
+};
+
+const getSupabaseServiceKey = () => {
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!key) {
+    throw new Error('Missing SUPABASE_SERVICE_ROLE_KEY environment variable');
+  }
+  return key;
+};
+
+// 延迟初始化，避免在模块加载时就检查环境变量
+let _supabaseUrl: string | null = null;
+let _supabaseAnonKey: string | null = null;
+
+const getSupabaseConfig = () => {
+  if (!_supabaseUrl || !_supabaseAnonKey) {
+    _supabaseUrl = getSupabaseUrl();
+    _supabaseAnonKey = getSupabaseAnonKey();
+  }
+  return { url: _supabaseUrl, key: _supabaseAnonKey };
+};
 
 // Client-side Supabase client
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = (() => {
+  try {
+    const { url, key } = getSupabaseConfig();
+    return createClient(url, key);
+  } catch (error) {
+    console.warn('Supabase client initialization failed:', error);
+    return null;
+  }
+})();
 
 // Browser client for client components
 export const createSupabaseBrowserClient = () => {
-  return createBrowserClient(supabaseUrl, supabaseAnonKey);
+  const { url, key } = getSupabaseConfig();
+  return createBrowserClient(url, key);
 };
 
 // Server client for server components and API routes
 export const createSupabaseServerClient = async () => {
+  const { cookies } = await import('next/headers');
   const cookieStore = await cookies();
+  const { url, key } = getSupabaseConfig();
   
-  return createServerClient(supabaseUrl, supabaseAnonKey, {
+  return createServerClient(url, key, {
     cookies: {
       getAll() {
         return cookieStore.getAll();
@@ -39,9 +83,10 @@ export const createSupabaseServerClient = async () => {
 
 // Service role client for admin operations
 export const createSupabaseServiceClient = () => {
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+  const serviceRoleKey = getSupabaseServiceKey();
+  const { url } = getSupabaseConfig();
   
-  return createClient(supabaseUrl, serviceRoleKey, {
+  return createClient(url, serviceRoleKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,

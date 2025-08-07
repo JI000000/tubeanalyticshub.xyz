@@ -12,18 +12,18 @@ export function validateLocale(locale: string): Locale {
   return locales.includes(locale as Locale) ? (locale as Locale) : defaultLocale;
 }
 
-// 语言配置 - 英文优先
+// 语言配置 - 使用各自语言的本地名称
 export const localeConfig = {
   'en-US': { name: 'English', flag: '🇺🇸', dir: 'ltr' },
-  'zh-CN': { name: 'Simplified Chinese', flag: '🇨🇳', dir: 'ltr' },
-  'ja-JP': { name: 'Japanese', flag: '🇯🇵', dir: 'ltr' },
+  'zh-CN': { name: '简体中文', flag: '🇨🇳', dir: 'ltr' },
+  'ja-JP': { name: '日本語', flag: '🇯🇵', dir: 'ltr' },
   'ko-KR': { name: '한국어', flag: '🇰🇷', dir: 'ltr' }
 };
 
 export default getRequestConfig(async ({ locale }) => {
   // 如果语言不支持，使用默认语言
   const validLocale = locales.includes(locale as Locale) ? locale : defaultLocale;
-  
+
   return {
     locale: validLocale as string,
     messages: (await import(`./messages/${validLocale}.json`)).default

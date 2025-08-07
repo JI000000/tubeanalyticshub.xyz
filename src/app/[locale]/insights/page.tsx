@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import { AppShell } from '@/components/layout/app-shell';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useAuth } from '@/hooks/useAuth';
+import { useSmartAuth } from '@/hooks/useSmartAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { LoginRequiredWrapper, LoginRequiredButton, FeatureAccessIndicator } from '@/components/auth/LoginRequiredWrapper';
 import { 
   Lightbulb, 
   TrendingUp, 
@@ -17,7 +19,8 @@ import {
   CheckCircle,
   XCircle,
   Info,
-  Zap
+  Zap,
+  Save
 } from 'lucide-react';
 
 interface InsightData {
@@ -39,9 +42,49 @@ interface InsightData {
 export default function InsightsPage() {
   const { t } = useTranslation();
   const { getUserId, isAuthenticated, loading: authLoading } = useAuth();
+  const { requireAuth } = useSmartAuth();
   const [insights, setInsights] = useState<InsightData[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'high' | 'medium' | 'low'>('all');
+
+  // 处理生成洞察
+  const handleGenerateInsights = async () => {
+    const canProceed = await requireAuth('advanced_analytics', {
+      message: '生成AI洞察需要登录，解锁更深度的数据洞察',
+      urgency: 'high',
+      metadata: { type: 'generate_insights' }
+    });
+    
+    if (canProceed) {
+      await regenerateInsights();
+    }
+  };
+
+  // 处理保存洞察
+  const handleSaveInsights = async () => {
+    const canProceed = await requireAuth('save_report', {
+      message: '保存洞察报告需要登录',
+      urgency: 'high',
+      metadata: { type: 'insights_report' }
+    });
+    
+    if (canProceed) {
+      console.log('保存洞察报告');
+    }
+  };
+
+  // 处理趋势分析
+  const handleTrendAnalysis = async () => {
+    const canProceed = await requireAuth('trend_analysis', {
+      message: '趋势分析需要登录，把握内容创作方向',
+      urgency: 'medium',
+      metadata: { type: 'trend_analysis' }
+    });
+    
+    if (canProceed) {
+      console.log('开始趋势分析');
+    }
+  };
 
   const fetchInsights = async () => {
     setLoading(true);
@@ -181,18 +224,35 @@ export default function InsightsPage() {
         {/* Header */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">AI Insights</h1>
+            <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              AI Insights
+              <FeatureAccessIndicator featureId="advanced_analytics" size="sm" />
+            </h1>
             <p className="text-gray-600">AI-powered analytics insights and recommendations</p>
           </div>
           <div className="flex gap-2">
+            <LoginRequiredButton
+              featureId="save_report"
+              variant="outline"
+              onClick={handleSaveInsights}
+              data-feature="save-insights"
+            >
+              <Save className="h-4 w-4 mr-2" />
+              Save Insights
+            </LoginRequiredButton>
             <Button onClick={fetchInsights} disabled={loading} variant="outline">
               <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
               {t('common.refresh')}
             </Button>
-            <Button onClick={regenerateInsights} disabled={loading}>
+            <LoginRequiredButton
+              featureId="advanced_analytics"
+              onClick={handleGenerateInsights}
+              disabled={loading}
+              data-feature="generate-insights"
+            >
               <Zap className="h-4 w-4 mr-2" />
               Regenerate
-            </Button>
+            </LoginRequiredButton>
           </div>
         </div>
 
@@ -379,10 +439,23 @@ export default function InsightsPage() {
                     Show All Insights
                   </Button>
                 )}
-                <Button onClick={regenerateInsights}>
+                <LoginRequiredButton
+                  featureId="advanced_analytics"
+                  onClick={handleGenerateInsights}
+                  data-feature="generate-insights"
+                >
                   <Zap className="h-4 w-4 mr-2" />
                   Generate Insights
-                </Button>
+                </LoginRequiredButton>
+                <LoginRequiredButton
+                  featureId="trend_analysis"
+                  variant="outline"
+                  onClick={handleTrendAnalysis}
+                  data-feature="trend-analysis"
+                >
+                  <TrendingUp className="h-4 w-4 mr-2" />
+                  Trend Analysis
+                </LoginRequiredButton>
               </div>
             </CardContent>
           </Card>

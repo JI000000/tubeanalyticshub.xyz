@@ -1,0 +1,251 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  e2e-tests:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+        suite: [smoke, auth, mobile, errors]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    
+    - name: Setup test environment
+      run: |
+        cp .env.example .env.local
+        echo "NEXTAUTH_SECRET=test-secret-for-ci" >> .env.local
+        echo "NEXTAUTH_URL=http://localhost:3000" >> .env.local
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Run E2E tests
+      run: npx playwright test --project=${{ matrix.browser }} e2e/*${{ matrix.suite }}*.spec.ts
+      env:
+        CI: true
+    
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report-${{ matrix.browser }}-${{ matrix.suite }}
+        path: playwright-report/
+        retention-days: 30
+    
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-${{ matrix.browser }}-${{ matrix.suite }}
+        path: test-results/
+        retention-days: 30
+
+  complete-journey-tests:
+    timeout-minutes: 90
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    
+    - name: Setup test environment
+      run: |
+        cp .env.example .env.local
+        echo "NEXTAUTH_SECRET=test-secret-for-ci" >> .env.local
+        echo "NEXTAUTH_URL=http://localhost:3000" >> .env.local
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Run complete user journey tests
+      run: npx playwright test e2e/complete-user-journey.spec.ts
+      env:
+        CI: true
+    
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: complete-journey-report
+        path: playwright-report/
+        retention-days: 30
+
+  mobile-device-tests:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        device: ['Mobile Chrome', 'Mobile Safari', 'iPad Pro']
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    
+    - name: Setup test environment
+      run: |
+        cp .env.example .env.local
+        echo "NEXTAUTH_SECRET=test-secret-for-ci" >> .env.local
+        echo "NEXTAUTH_URL=http://localhost:3000" >> .env.local
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Run mobile device tests
+      run: npx playwright test --project="${{ matrix.device }}" e2e/mobile-login-experience.spec.ts
+      env:
+        CI: true
+    
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: mobile-test-results-${{ matrix.device }}
+        path: test-results/
+        retention-days: 30
+
+  performance-tests:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps chromium
+    
+    - name: Setup test environment
+      run: |
+        cp .env.example .env.local
+        echo "NEXTAUTH_SECRET=test-secret-for-ci" >> .env.local
+        echo "NEXTAUTH_URL=http://localhost:3000" >> .env.local
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Run performance tests
+      run: |
+        npx playwright test --grep "performance|timing|speed" --project=chromium
+      env:
+        CI: true
+    
+    - name: Upload performance results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: performance-results
+        path: test-results/
+        retention-days: 30
+
+  test-summary:
+    runs-on: ubuntu-latest
+    needs: [e2e-tests, complete-journey-tests, mobile-device-tests, performance-tests]
+    if: always()
+    
+    steps:
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+    
+    - name: Generate test summary
+      run: |
+        echo "# E2E Test Results Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## Test Execution Status" >> $GITHUB_STEP_SUMMARY
+        echo "- E2E Tests: ${{ needs.e2e-tests.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Complete Journey Tests: ${{ needs.complete-journey-tests.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Mobile Device Tests: ${{ needs.mobile-device-tests.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Performance Tests: ${{ needs.performance-tests.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "## Artifacts" >> $GITHUB_STEP_SUMMARY
+        echo "Test reports and screenshots are available in the artifacts section." >> $GITHUB_STEP_SUMMARY
+    
+    - name: Comment PR with results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const results = {
+            'e2e-tests': '${{ needs.e2e-tests.result }}',
+            'complete-journey-tests': '${{ needs.complete-journey-tests.result }}',
+            'mobile-device-tests': '${{ needs.mobile-device-tests.result }}',
+            'performance-tests': '${{ needs.performance-tests.result }}'
+          };
+          
+          let summary = '## 🧪 E2E Test Results\n\n';
+          
+          for (const [test, result] of Object.entries(results)) {
+            const emoji = result === 'success' ? '✅' : result === 'failure' ? '❌' : '⚠️';
+            summary += `${emoji} **${test}**: ${result}\n`;
+          }
+          
+          summary += '\n📊 Detailed reports are available in the [Actions tab](' + 
+                    context.payload.repository.html_url + '/actions/runs/' + context.runId + ')';
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: summary
+          });
+
+  notify-on-failure:
+    runs-on: ubuntu-latest
+    needs: [e2e-tests, complete-journey-tests, mobile-device-tests, performance-tests]
+    if: failure() && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Notify team of test failures
+      run: |
+        echo "E2E tests failed on main branch"
+        echo "Please check the test results and fix any issues"
+        # Add notification logic here (Slack, email, etc.)
