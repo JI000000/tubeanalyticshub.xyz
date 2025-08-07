@@ -35,6 +35,8 @@
     "dev:cleanup": "node scripts/dev-tools.js cleanup",
     "db:check": "node scripts/dev-tools.js db",
     "db:init": "node scripts/dev-tools.js init-db",
+    "db:structure": "node scripts/check-db-structure.js",
+    "db:sync": "node scripts/sync-db-structure.js",
     "deploy:prep": "node scripts/dev-tools.js deploy-prep",
     "deploy": "vercel --prod",
     "deploy:preview": "vercel"

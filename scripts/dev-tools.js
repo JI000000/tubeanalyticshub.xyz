@@ -141,12 +141,23 @@ async function checkDatabaseConnection() {
       auth: { autoRefreshToken: false, persistSession: false }
     });
     
-    // 测试连接
-    const { data, error } = await supabase.rpc('version');
+    // 测试连接 - 使用简单的查询而不是version函数
+    const { data, error } = await supabase
+      .from('yt_users')
+      .select('count')
+      .limit(1);
     
     if (error) {
-      log(`❌ 数据库连接失败: ${error.message}`, 'red');
-      return false;
+      // 如果表不存在，尝试查询其他表
+      const { data: altData, error: altError } = await supabase
+        .from('accounts')
+        .select('count')
+        .limit(1);
+      
+      if (altError) {
+        log(`❌ 数据库连接失败: ${error.message}`, 'red');
+        return false;
+      }
     }
     
     log('✅ 数据库连接正常', 'green');
