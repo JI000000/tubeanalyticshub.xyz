@@ -27,12 +27,15 @@
    - 点击左侧菜单的 "SQL Editor"
    - 点击 "New query"
 
-3. **执行修复版本的schema.sql**
-   - 打开项目中的 `supabase/schema-fixed.sql` 文件（修复版本）
+3. **执行增量更新版本的schema.sql**
+   - 打开项目中的 `supabase/schema-incremental.sql` 文件（增量更新版本）
    - 复制全部内容到SQL编辑器
    - 点击 "Run" 执行
    
-   **注意**: 原始 `schema.sql` 有依赖关系错误，请使用 `schema-fixed.sql`
+   **注意**: 
+   - 原始 `schema.sql` 有依赖关系错误
+   - `schema-fixed.sql` 会重复创建已存在的触发器
+   - 请使用 `schema-incremental.sql` 只创建缺失的结构
 
 4. **验证结果**
    - 执行完成后，检查 "Table Editor" 中是否出现所有表
