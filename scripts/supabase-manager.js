@@ -235,13 +235,11 @@ function showHelp() {
   log('  npm run db:check     - 检查数据库结构和RLS状态', 'cyan');
   log('  npm run db:sync      - 同步数据库结构', 'cyan');
   log('  npm run db:rls       - 管理RLS策略', 'cyan');
-  log('  npm run db:rename    - 重命名NextAuth表', 'cyan');
   log('  npm run db:help      - 显示此帮助信息', 'cyan');
   
   log('\n📁 相关文件:', 'bright');
   log('  supabase/schema.sql                   - 推荐的结构文件', 'green');
   log('  supabase/rls.sql                      - RLS管理脚本', 'green');
-  log('  supabase/rename-nextauth.sql          - 表重命名脚本', 'green');
   
   log('\n💡 提示:', 'yellow');
   log('  - 所有SQL操作需要在Supabase Dashboard中手动执行', 'yellow');
@@ -263,9 +261,6 @@ async function main() {
         break;
       case 'rls':
         await manageRLS();
-        break;
-      case 'rename':
-        await renameNextAuthTables();
         break;
       case 'help':
       default:

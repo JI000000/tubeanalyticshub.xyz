@@ -41,7 +41,6 @@ npm run db:rename
 |--------|------|--------|
 | `schema.sql` | **推荐** - 完整的数据库结构文件 | ⭐⭐⭐⭐⭐ |
 | `rls.sql` | **推荐** - RLS策略管理工具 | ⭐⭐⭐⭐⭐ |
-| `rename-nextauth.sql` | **推荐** - NextAuth表重命名 | ⭐⭐⭐⭐⭐ |
 
 ### 配置文件
 
@@ -53,9 +52,8 @@ npm run db:rename
 ## 执行顺序
 
 ### 首次设置
-1. **重命名NextAuth表** → 执行 `rename-nextauth.sql`
-2. **同步数据库结构** → 执行 `schema.sql`
-3. **管理RLS策略** → 执行 `rls.sql`
+1. **同步数据库结构** → 执行 `schema.sql`
+2. **管理RLS策略** → 执行 `rls.sql`
 
 ### 日常维护
 1. **检查状态** → `npm run db:check`
@@ -63,23 +61,7 @@ npm run db:rename
 
 ## 详细操作指南
 
-### 1. NextAuth表重命名
-
-**目的**: 将NextAuth相关表重命名为`yt_`前缀，符合团队命名规范
-
-**执行步骤**:
-1. 打开 Supabase Dashboard
-2. 进入 SQL Editor
-3. 复制 `supabase/rename-nextauth.sql` 内容
-4. 点击 "Run" 执行
-
-**重命名内容**:
-- `accounts` → `yt_accounts`
-- `sessions` → `yt_sessions`
-- `users` → `yt_users_auth`
-- `verification_tokens` → `yt_verification_tokens`
-
-### 2. 数据库结构同步
+### 1. 数据库结构同步
 
 **目的**: 创建缺失的表、索引、触发器和函数
 
@@ -95,7 +77,7 @@ npm run db:rename
 - 支持增量更新
 - 包含完整的数据库结构
 
-### 3. RLS安全策略管理
+### 2. RLS安全策略管理
 
 **目的**: 启用Row Level Security并创建安全策略
 

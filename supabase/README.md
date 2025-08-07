@@ -6,7 +6,6 @@
 supabase/
 ├── schema.sql              # 主数据库结构文件（推荐）
 ├── rls.sql                 # RLS安全策略管理
-├── rename-nextauth.sql     # NextAuth表重命名
 ├── config.toml             # Supabase配置
 ├── .gitignore              # Git忽略文件
 └── README.md               # 本文件
@@ -18,9 +17,8 @@ supabase/
 
 | 文件名 | 用途 | 执行顺序 |
 |--------|------|----------|
-| `schema.sql` | **主数据库结构** - 包含所有表、索引、触发器 | 2 |
-| `rls.sql` | **安全策略管理** - RLS启用和策略创建 | 3 |
-| `rename-nextauth.sql` | **表重命名** - NextAuth表名规范化 | 1 |
+| `schema.sql` | **主数据库结构** - 包含所有表、索引、触发器 | 1 |
+| `rls.sql` | **安全策略管理** - RLS启用和策略创建 | 2 |
 
 ### 配置文件
 
@@ -33,19 +31,13 @@ supabase/
 
 ### 首次设置（按顺序执行）
 
-1. **重命名NextAuth表**
-   ```sql
-   -- 在Supabase Dashboard执行
-   -- 文件：rename-nextauth.sql
-   ```
-
-2. **创建数据库结构**
+1. **创建数据库结构**
    ```sql
    -- 在Supabase Dashboard执行
    -- 文件：schema.sql
    ```
 
-3. **配置安全策略**
+2. **配置安全策略**
    ```sql
    -- 在Supabase Dashboard执行
    -- 文件：rls.sql
