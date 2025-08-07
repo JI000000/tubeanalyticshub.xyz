@@ -92,12 +92,11 @@ SELECT 'yt_sessions' as table_name, EXISTS(SELECT 1 FROM information_schema.tabl
 SELECT 'yt_users_auth' as table_name, EXISTS(SELECT 1 FROM information_schema.tables WHERE table_name = 'yt_users_auth') as exists;
 SELECT 'yt_verification_tokens' as table_name, EXISTS(SELECT 1 FROM information_schema.tables WHERE table_name = 'yt_verification_tokens') as exists;
 
--- 检查RLS状态
+-- 检查RLS状态（已修正）
 SELECT 
     schemaname,
     tablename,
-    rowsecurity,
-    forcerowsecurity
+    rowsecurity
 FROM pg_tables 
 WHERE tablename IN ('yt_accounts', 'yt_sessions', 'yt_users_auth', 'yt_verification_tokens');
 

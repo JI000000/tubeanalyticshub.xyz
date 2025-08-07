@@ -161,10 +161,155 @@ async function checkDatabaseConnection() {
     }
     
     log('✅ 数据库连接正常', 'green');
+    
+    // 检查RLS状态
+    await checkRLSStatus(supabase);
+    
+    // 检查表结构
+    await checkTableStructure(supabase);
+    
     return true;
   } catch (error) {
     log(`❌ 数据库连接异常: ${error.message}`, 'red');
     return false;
+  }
+}
+
+// 检查RLS状态
+async function checkRLSStatus(supabase) {
+  logHeader('RLS安全策略检查');
+  
+  try {
+    const { data, error } = await supabase.rpc('exec_sql', {
+      sql_query: `
+        SELECT 
+          schemaname,
+          tablename,
+          rowsecurity as rls_enabled
+        FROM pg_tables 
+        WHERE schemaname = 'public' 
+        AND tablename LIKE 'yt_%'
+        ORDER BY tablename;
+      `
+    });
+    
+    if (error) {
+      // 如果exec_sql不可用，使用直接查询
+      const { data: directData, error: directError } = await supabase
+        .from('pg_tables')
+        .select('schemaname, tablename, rowsecurity')
+        .eq('schemaname', 'public')
+        .like('tablename', 'yt_%')
+        .order('tablename');
+      
+      if (directError) {
+        log('⚠️  无法检查RLS状态（需要管理员权限）', 'yellow');
+        return;
+      }
+      
+      displayRLSStatus(directData);
+    } else {
+      displayRLSStatus(data);
+    }
+  } catch (error) {
+    log('⚠️  RLS状态检查失败', 'yellow');
+  }
+}
+
+// 显示RLS状态
+function displayRLSStatus(data) {
+  if (!data || data.length === 0) {
+    log('⚠️  未找到yt_前缀的表', 'yellow');
+    return;
+  }
+  
+  let enabledCount = 0;
+  let disabledCount = 0;
+  
+  log('\n📊 RLS状态概览:', 'cyan');
+  log('表名'.padEnd(30) + 'RLS状态', 'bright');
+  log('-'.repeat(40), 'cyan');
+  
+  data.forEach(row => {
+    const status = row.rowsecurity ? '✅ 启用' : '❌ 禁用';
+    const color = row.rowsecurity ? 'green' : 'red';
+    log(`${row.tablename.padEnd(30)} ${status}`, color);
+    
+    if (row.rowsecurity) {
+      enabledCount++;
+    } else {
+      disabledCount++;
+    }
+  });
+  
+  log('-'.repeat(40), 'cyan');
+  log(`总计: ${data.length} 个表`, 'bright');
+  log(`✅ RLS启用: ${enabledCount} 个`, 'green');
+  log(`❌ RLS禁用: ${disabledCount} 个`, 'red');
+  
+  if (disabledCount > 0) {
+    log('\n💡 建议: 运行 npm run db:rls 启用所有表的RLS', 'yellow');
+  }
+}
+
+// 检查表结构
+async function checkTableStructure(supabase) {
+  logHeader('数据库表结构检查');
+  
+  const requiredTables = [
+    'yt_users',
+    'yt_channels', 
+    'yt_videos',
+    'yt_comments',
+    'yt_scraping_tasks',
+    'yt_ai_analysis',
+    'yt_analytics',
+    'yt_insights',
+    'yt_reports',
+    'yt_teams',
+    'yt_team_members',
+    'yt_dashboards',
+    'yt_ai_insights',
+    'yt_competitor_analysis',
+    'yt_team_invitations',
+    'yt_collaboration_comments',
+    'yt_anonymous_trials',
+    'yt_login_analytics',
+    // NextAuth相关表
+    'yt_accounts',
+    'yt_sessions', 
+    'yt_users_auth',
+    'yt_verification_tokens'
+  ];
+  
+  let existingCount = 0;
+  let missingTables = [];
+  
+  for (const tableName of requiredTables) {
+    try {
+      const { data, error } = await supabase
+        .from(tableName)
+        .select('count')
+        .limit(1);
+      
+      if (error) {
+        missingTables.push(tableName);
+      } else {
+        existingCount++;
+        log(`✅ ${tableName}`, 'green');
+      }
+    } catch (error) {
+      missingTables.push(tableName);
+    }
+  }
+  
+  log(`\n📊 表结构检查结果: ${existingCount}/${requiredTables.length} 个表存在`, 
+      existingCount === requiredTables.length ? 'green' : 'yellow');
+  
+  if (missingTables.length > 0) {
+    log('\n❌ 缺失的表:', 'red');
+    missingTables.forEach(table => log(`   - ${table}`, 'red'));
+    log('\n💡 建议: 运行 npm run db:sync 同步数据库结构', 'yellow');
   }
 }
 
