@@ -39,10 +39,10 @@ const requiredTables = [
 
 // NextAuth相关表
 const nextAuthTables = [
-  'accounts',
-  'sessions', 
-  'users',
-  'verification_tokens'
+  'yt_accounts',
+  'yt_sessions', 
+  'yt_users_auth',
+  'yt_verification_tokens'
 ];
 
 async function checkTableStructure() {
