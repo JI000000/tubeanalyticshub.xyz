@@ -126,18 +126,33 @@ async function checkDatabaseConnection() {
   logHeader('数据库连接检查');
   
   try {
-    const dbCheckScript = path.join(__dirname, 'database/check-database.js');
+    require('dotenv').config({ path: '.env.local' });
+    const { createClient } = require('@supabase/supabase-js');
     
-    if (fs.existsSync(dbCheckScript)) {
-      await runCommand('node', [dbCheckScript]);
-      log('✅ 数据库连接正常', 'green');
-      return true;
-    } else {
-      log('⚠️  数据库检查脚本不存在', 'yellow');
-      return true;
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    
+    if (!supabaseUrl || !supabaseServiceKey) {
+      log('❌ 缺少数据库环境变量', 'red');
+      return false;
     }
+    
+    const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: { autoRefreshToken: false, persistSession: false }
+    });
+    
+    // 测试连接
+    const { data, error } = await supabase.rpc('version');
+    
+    if (error) {
+      log(`❌ 数据库连接失败: ${error.message}`, 'red');
+      return false;
+    }
+    
+    log('✅ 数据库连接正常', 'green');
+    return true;
   } catch (error) {
-    log(`❌ 数据库连接失败: ${error.message}`, 'red');
+    log(`❌ 数据库连接异常: ${error.message}`, 'red');
     return false;
   }
 }
@@ -189,16 +204,56 @@ async function initDatabase() {
   logHeader('数据库初始化');
   
   try {
-    const initScript = path.join(__dirname, 'database/init-database.js');
+    require('dotenv').config({ path: '.env.local' });
+    const { createClient } = require('@supabase/supabase-js');
+    const fs = require('fs');
+    const path = require('path');
     
-    if (fs.existsSync(initScript)) {
-      await runCommand('node', [initScript]);
-      log('✅ 数据库初始化成功', 'green');
-      return true;
-    } else {
-      log('⚠️  数据库初始化脚本不存在', 'yellow');
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    
+    if (!supabaseUrl || !supabaseServiceKey) {
+      log('❌ 缺少数据库环境变量', 'red');
+      return false;
+    }
+    
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+    
+    // 读取schema文件
+    const schemaPath = path.join(__dirname, '..', 'supabase', 'schema.sql');
+    
+    if (!fs.existsSync(schemaPath)) {
+      log('⚠️  schema.sql 文件不存在，跳过初始化', 'yellow');
       return true;
     }
+    
+    const schemaSql = fs.readFileSync(schemaPath, 'utf8');
+    const statements = schemaSql
+      .split(';')
+      .map(stmt => stmt.trim())
+      .filter(stmt => stmt.length > 0 && !stmt.startsWith('--'));
+    
+    log(`📝 找到 ${statements.length} 个SQL语句`, 'blue');
+    
+    // 执行SQL语句
+    for (let i = 0; i < statements.length; i++) {
+      const statement = statements[i];
+      
+      if (statement.includes('CREATE TABLE') || statement.includes('CREATE INDEX')) {
+        try {
+          const { error } = await supabase.rpc('exec_sql', { sql_query: statement });
+          
+          if (error && !error.message.includes('already exists')) {
+            log(`⚠️  SQL执行警告: ${error.message.substring(0, 50)}...`, 'yellow');
+          }
+        } catch (err) {
+          log(`⚠️  跳过语句 ${i + 1}: ${err.message.substring(0, 50)}...`, 'yellow');
+        }
+      }
+    }
+    
+    log('✅ 数据库初始化完成', 'green');
+    return true;
   } catch (error) {
     log(`❌ 数据库初始化失败: ${error.message}`, 'red');
     return false;
